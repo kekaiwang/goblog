@@ -2,10 +2,7 @@ package routers
 
 import (
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/context"
-	"github.com/deepzz0/goblog/helper"
-	"goblog/controllers"
-	"goblog/controllers/background"
+	"github.com/wkekai/goblog/controllers"
 )
 
 const (
@@ -23,17 +20,20 @@ func init() {
     beego.Router("/", &controllers.MainController{})
 
 	// admin
-	beego.InsertFilter("/admin/*", beego.BeforeRouter, FilterUser)
+	//beego.InsertFilter("/admin/*", beego.BeforeRouter, FilterUser)
 }
 
-var FilterUser = func(ctx *context.Context) {
-	val, ok := ctx.Input.Session(background.SESSIONNAME).(string)
-
-	if !ok || val == "" {
-		if ctx.Request.Method == "GET" {
-			ctx.Redirect(302, "login")
-		} else if ctx.Request.Method == "POST" {
-			resp := helper.NewResponse()
-		}
-	}
-}
+//var FilterUser = func(ctx *context.Context) {
+//	val, ok := ctx.Input.Session(background.SESSIONNAME).(string)
+//
+//	if !ok || val == "" {
+//		if ctx.Request.Method == "GET" {
+//			ctx.Redirect(302, "login")
+//		} else if ctx.Request.Method == "POST" {
+//			resp := helper.NewResponse()
+//			resp.Status = RS.RS_user_not_login
+//			resp.Data = "/login"
+//			resp.WriteJson(ctx.ResponseWriter)
+//		}
+//	}
+//}

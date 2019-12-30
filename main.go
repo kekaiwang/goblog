@@ -1,8 +1,8 @@
 package main
 
 import (
-	_ "goblog/routers"
 	"github.com/astaxie/beego"
+	_ "github.com/wkekai/goblog/routers"
 )
 
 func main() {
