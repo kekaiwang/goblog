@@ -3,6 +3,7 @@ package routers
 import (
 	"github.com/astaxie/beego"
 	"github.com/wkekai/goblog/controllers"
+	"github.com/wkekai/goblog/controllers/admin"
 )
 
 const (
@@ -20,11 +21,12 @@ func init() {
     beego.Router("/", &controllers.MainController{})
 
 	// admin
-	//beego.InsertFilter("/admin/*", beego.BeforeRouter, FilterUser)
+	//beego.InsertFilter("/v1/admin/*", beego.BeforeRouter, FilterUser)
+	beego.Router("/v1/admin/login", &admin.UserController{}, "*:Login")
 }
 
 //var FilterUser = func(ctx *context.Context) {
-//	val, ok := ctx.Input.Session(background.SESSIONNAME).(string)
+//	val, ok := ctx.Input.Session(admin.SESSIONNAME).(string)
 //
 //	if !ok || val == "" {
 //		if ctx.Request.Method == "GET" {

@@ -3,28 +3,39 @@ package helper
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/deepzz0/goblog/RS"
+	"github.com/wkekai/goblog/RS"
 	"net/http"
+)
+
+const (
+	WARNING = "warning"
+	SUCCESS = "success"
+	ALERT 	= "alert"
+	INFO	= "info"
 )
 
 type Response struct {
 	Status int
 	Data interface{}
-	Err error
+	Err Error
 }
 
 type Success struct {
 	Level string
-	Msg string
+	Message string
 }
 
 type Error struct {
 	Level string
-	Msg string
+	Message string
 }
 
 func NewResponse() *Response {
-	return &Response{Status: RS.RS_success}
+	return &Response{Status: http.StatusOK}
+}
+
+func (resp *Response) Tips(level string, rs int) {
+	resp.Err = Error{level, "code=" + fmt.Sprint(rs) + "|" + RS.Desc(rs)}
 }
 
 func (resp *Response) WriteJson(w http.ResponseWriter) {
