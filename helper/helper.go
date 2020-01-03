@@ -1,17 +1,20 @@
 package helper
 
 import (
+	"crypto/md5"
 	"encoding/json"
 	"fmt"
-	"github.com/wkekai/goblog/RS"
+	"io"
 	"net/http"
 )
 
+// -------------------- response ----------------------
 const (
 	WARNING = "warning"
 	SUCCESS = "success"
 	ALERT 	= "alert"
 	INFO	= "info"
+	ERROR 	= "error"
 )
 
 type Response struct {
@@ -34,8 +37,8 @@ func NewResponse() *Response {
 	return &Response{Status: http.StatusOK}
 }
 
-func (resp *Response) Tips(level string, rs int) {
-	resp.Err = Error{level, "code=" + fmt.Sprint(rs) + "|" + RS.Desc(rs)}
+func (resp *Response) Tips(level string, rs string) {
+	resp.Err = Error{level, rs}
 }
 
 func (resp *Response) WriteJson(w http.ResponseWriter) {
@@ -46,4 +49,20 @@ func (resp *Response) WriteJson(w http.ResponseWriter) {
 	} else {
 		w.Write(b)
 	}
+}
+
+// -------------------- password ----------------------
+const (
+	SALT = "#,.><)(_+-w*k$^*&"
+)
+
+func Md5(name, password, salt string) string {
+	saltString := "!w@k#k"
+	pass := md5.New()
+	io.WriteString(pass, saltString)
+	io.WriteString(pass, name)
+	io.WriteString(pass, salt)
+	io.WriteString(pass, password)
+
+	return fmt.Sprintf("%x", pass.Sum(nil))
 }

@@ -13,7 +13,7 @@ func Init() {
 	dbuser := beego.AppConfig.String("mysqluser")
 	dbpassword := beego.AppConfig.String("mysqlpass")
 
-	dsn := dbuser + ":" + dbpassword + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8"
+	dsn := dbuser + ":" + dbpassword + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8&loc=Local"
 
 	orm.RegisterDataBase("default", "mysql", dsn, 30)
 	orm.RegisterModelWithPrefix("wkk_", new(AdminUser))
