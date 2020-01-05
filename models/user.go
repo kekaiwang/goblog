@@ -28,9 +28,6 @@ type LoginRes struct {
 	Token string
 }
 
-var(
-	key []byte = []byte("aweQurt178BNI")
-)
 func Login(name, password, ip string) *LoginRes {
 	o := orm.NewOrm()
 	user := AdminUser{Name: name}
