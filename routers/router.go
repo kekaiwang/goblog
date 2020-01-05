@@ -25,10 +25,11 @@ func init() {
 	beego.Router("/v1/admin/login", &admin.UserController{}, "post:Login")
 	beego.Router("/v1/admin/getInfo", &admin.UserController{}, "get:GetInfo")
 	beego.Router("/v1/admin/logout", &admin.UserController{}, "post:Logout")
-	beego.Router("/v1/admin/article/classifyList", &admin.ArticleController{}, "get:ClassifyList")
-	beego.Router("/v1/admin/article/createClassify", &admin.ArticleController{}, "put:CreateClassify")
-	beego.Router("/v1/admin/article/updateClassify", &admin.ArticleController{}, "post:UpdateClassify")
-	beego.Router("/v1/admin/article/modifyClassify", &admin.ArticleController{}, "post:ModifyClassify")
+	beego.Router("/v1/admin/article/tagList", &admin.ArticleController{}, "get:TagList")
+	beego.Router("/v1/admin/article/createTag", &admin.ArticleController{}, "put:CreateTag")
+	beego.Router("/v1/admin/article/updateTag", &admin.ArticleController{}, "post:UpdateTag")
+	beego.Router("/v1/admin/article/modifyTag", &admin.ArticleController{}, "post:ModifyTag")
+	beego.Router("/v1/admin/article/articleList", &admin.ArticleController{}, "get:ArticleList")
 }
 
 //var FilterUser = func(ctx *context.Context) {

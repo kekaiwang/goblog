@@ -16,5 +16,5 @@ func Init() {
 	dsn := dbuser + ":" + dbpassword + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8&loc=Local"
 
 	orm.RegisterDataBase("default", "mysql", dsn, 30)
-	orm.RegisterModelWithPrefix("wkk_", new(AdminUser), new(Tag))
+	orm.RegisterModelWithPrefix("wkk_", new(AdminUser), new(Tag), new(Article))
 }

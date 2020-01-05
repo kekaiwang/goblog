@@ -17,7 +17,7 @@ type TagInfo struct {
 	Total int64
 }
 
-func (article *ArticleController) ClassifyList() {
+func (article *ArticleController) TagList() {
 	resp := helper.NewResponse()
 	var info TagInfo
 
@@ -34,14 +34,14 @@ func (article *ArticleController) ClassifyList() {
 	resp.WriteJson(article.Ctx.ResponseWriter)
 }
 
-func (article *ArticleController) CreateClassify() {
-	var classify models.Tag
+func (article *ArticleController) CreateTag() {
+	var tag models.Tag
 	resp := helper.NewResponse()
 
-	json.Unmarshal(article.Ctx.Input.RequestBody, &classify)
+	json.Unmarshal(article.Ctx.Input.RequestBody, &tag)
 
 	query := article.o.QueryTable(new(models.Tag))
-	classifyNum, _ := query.Filter("name", classify.Name).Count()
+	classifyNum, _ := query.Filter("name", tag.Name).Count()
 
 	if classifyNum > 0 {
 		resp.Status = RS.RS_tag_exist
@@ -50,8 +50,8 @@ func (article *ArticleController) CreateClassify() {
 		return
 	}
 
-	classify.Created = time.Now()
-	_, err := article.o.Insert(&classify)
+	tag.Created = time.Now()
+	_, err := article.o.Insert(&tag)
 
 	if err != nil {
 		resp.Status = RS.RS_create_failed
@@ -60,33 +60,33 @@ func (article *ArticleController) CreateClassify() {
 		return
 	}
 
-	resp.Data = classify
+	resp.Data = tag
 
 	resp.WriteJson(article.Ctx.ResponseWriter)
 }
 
-func (article *ArticleController) UpdateClassify() {
+func (article *ArticleController) UpdateTag() {
 	resp := helper.NewResponse()
-	var classify models.Tag
+	var tag models.Tag
 
-	json.Unmarshal(article.Ctx.Input.RequestBody, &classify)
+	json.Unmarshal(article.Ctx.Input.RequestBody, &tag)
 
-	tag := models.Tag{Id: classify.Id}
+	info := models.Tag{Id: tag.Id}
 
-	article.o.Read(&tag, "id")
+	article.o.Read(&info, "id")
 
-	if tag.Name == "" {
+	if info.Name == "" {
 		resp.Status = RS.RS_not_found
 		resp.Tips(helper.WARNING, RS.Desc(RS.RS_not_found))
 		resp.WriteJson(article.Ctx.ResponseWriter)
 		return
 	}
 
-	tag.Name = classify.Name
-	tag.Status = classify.Status
-	tag.Updated = time.Now()
+	info.Name = tag.Name
+	info.Status = tag.Status
+	info.Updated = time.Now()
 
-	if num, err := article.o.Update(&tag); err != nil {
+	if num, err := article.o.Update(&info); err != nil {
 		resp.Status = RS.RS_update_failed
 		resp.Tips(helper.WARNING, RS.Desc(RS.RS_update_failed))
 		resp.WriteJson(article.Ctx.ResponseWriter)
@@ -98,16 +98,16 @@ func (article *ArticleController) UpdateClassify() {
 	resp.WriteJson(article.Ctx.ResponseWriter)
 }
 
-func (article *ArticleController) ModifyClassify() {
+func (article *ArticleController) ModifyTag() {
 	resp := helper.NewResponse()
 
-	var classify models.Tag
+	var tag models.Tag
 
-	json.Unmarshal(article.Ctx.Input.RequestBody, &classify)
+	json.Unmarshal(article.Ctx.Input.RequestBody, &tag)
 
-	classify.Updated = time.Now()
+	tag.Updated = time.Now()
 
-	if num, err := article.o.Update(&classify, "status", "updated"); err != nil {
+	if num, err := article.o.Update(&tag, "status", "updated"); err != nil {
 		resp.Status = RS.RS_update_failed
 		resp.Tips(helper.WARNING, RS.Desc(RS.RS_update_failed))
 		resp.WriteJson(article.Ctx.ResponseWriter)
@@ -117,4 +117,12 @@ func (article *ArticleController) ModifyClassify() {
 	}
 
 	resp.WriteJson(article.Ctx.ResponseWriter)
+}
+
+type ArticleList struct {
+
+}
+
+func (article *ArticleController) ArticleList() {
+
 }
