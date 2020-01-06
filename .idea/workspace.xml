@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7e3612c-da3e-4e75-b3f7-1dd882a4c67b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/models/article.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/admin/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/article.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goblog" beforeDir="false" afterPath="$PROJECT_DIR$/goblog" afterDir="false" />
@@ -48,7 +47,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -81,9 +80,10 @@
       <screen x="0" y="23" width="1680" height="978" />
     </state>
     <state x="440" y="177" key="#Notifications/0.23.1680.978/1680.23.1920.1057@0.23.1680.978" timestamp="1577259811326" />
-    <state x="341" y="151" key="SettingsEditor" timestamp="1577263431235">
-      <screen x="0" y="23" width="1680" height="978" />
+    <state x="2368" y="118" key="SettingsEditor" timestamp="1578291884969">
+      <screen x="1680" y="23" width="1920" height="1057" />
     </state>
     <state x="341" y="151" key="SettingsEditor/0.23.1680.978/1680.23.1920.1057@0.23.1680.978" timestamp="1577263431235" />
+    <state x="2368" y="118" key="SettingsEditor/0.23.1680.978/1680.23.1920.1057@1680.23.1920.1057" timestamp="1578291884969" />
   </component>
 </project>

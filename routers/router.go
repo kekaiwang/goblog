@@ -25,10 +25,16 @@ func init() {
 	beego.Router("/v1/admin/login", &admin.UserController{}, "post:Login")
 	beego.Router("/v1/admin/getInfo", &admin.UserController{}, "get:GetInfo")
 	beego.Router("/v1/admin/logout", &admin.UserController{}, "post:Logout")
+	// ----------- tag --------------
 	beego.Router("/v1/admin/article/tagList", &admin.ArticleController{}, "get:TagList")
 	beego.Router("/v1/admin/article/createTag", &admin.ArticleController{}, "put:CreateTag")
 	beego.Router("/v1/admin/article/updateTag", &admin.ArticleController{}, "post:UpdateTag")
-	beego.Router("/v1/admin/article/modifyTag", &admin.ArticleController{}, "post:ModifyTag")
+	// ----------- category --------------
+	beego.Router("/v1/admin/article/categoryList", &admin.ArticleController{}, "get:CategoryList")
+	beego.Router("/v1/admin/article/createCategory", &admin.ArticleController{}, "put:CreateCategory")
+	beego.Router("/v1/admin/article/updateCategory", &admin.ArticleController{}, "post:UpdateCategory")
+
+	// ----------- article --------------
 	beego.Router("/v1/admin/article/articleList", &admin.ArticleController{}, "get:ArticleList")
 }
 
