@@ -7,6 +7,7 @@ type Article struct {
 	Author string
 	Title string
 	Count int
+	Markdown string
 	Content string
 	CategoryId int
 	TagIds string
@@ -19,4 +20,5 @@ type Article struct {
 	Created time.Time
 	EditTime time.Time
 	Updated time.Time
+	DisplayTime time.Time
 }

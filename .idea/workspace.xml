@@ -3,9 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b7e3612c-da3e-4e75-b3f7-1dd882a4c67b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/app.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/app.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/admin/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/article.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goblog" beforeDir="false" afterPath="$PROJECT_DIR$/goblog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/base.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/base.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helper/helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/helper/helper.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/article.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,10 +83,22 @@
       <screen x="0" y="23" width="1680" height="978" />
     </state>
     <state x="440" y="177" key="#Notifications/0.23.1680.978/1680.23.1920.1057@0.23.1680.978" timestamp="1577259811326" />
+    <state x="2229" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1578367408323">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state x="2229" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1680.978/1680.23.1920.1057@1680.23.1920.1057" timestamp="1578367408323" />
     <state x="2368" y="118" key="SettingsEditor" timestamp="1578291884969">
       <screen x="1680" y="23" width="1920" height="1057" />
     </state>
     <state x="341" y="151" key="SettingsEditor/0.23.1680.978/1680.23.1920.1057@0.23.1680.978" timestamp="1577263431235" />
     <state x="2368" y="118" key="SettingsEditor/0.23.1680.978/1680.23.1920.1057@1680.23.1920.1057" timestamp="1578291884969" />
+    <state x="2201" y="155" width="639" height="714" key="find.popup" timestamp="1578367391982">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state x="2201" y="155" width="639" height="714" key="find.popup/0.23.1680.978/1680.23.1920.1057@1680.23.1920.1057" timestamp="1578367391982" />
+    <state x="2186" y="238" width="670" height="676" key="search.everywhere.popup" timestamp="1578365424274">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state x="2186" y="238" width="670" height="676" key="search.everywhere.popup/0.23.1680.978/1680.23.1920.1057@1680.23.1920.1057" timestamp="1578365424274" />
   </component>
 </project>
