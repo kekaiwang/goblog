@@ -19,6 +19,8 @@ func init() {
 
 	//blog
     beego.Router("/", &controllers.MainController{})
+	beego.Router("/about", &controllers.MainController{}, "get:About")
+	beego.Router("/article/:slug([\\w\\-]+).html", &controllers.MainController{}, "get:ArticleInfo")
 
 	// admin
 	//beego.InsertFilter("/v1/admin/*", beego.BeforeRouter, FilterUser)

@@ -3,13 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b7e3612c-da3e-4e75-b3f7-1dd882a4c67b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/app.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/app.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/admin/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/article.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/default.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/default.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goblog" beforeDir="false" afterPath="$PROJECT_DIR$/goblog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper/helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/helper/helper.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/article.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Go File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -44,6 +42,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -51,6 +50,11 @@
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/css" />
+    </key>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -79,6 +83,10 @@
       <screen x="0" y="23" width="1680" height="978" />
     </state>
     <state x="440" y="177" key="#Go_Modules_(vgo)/0.23.1680.978/1680.23.1920.1057@0.23.1680.978" timestamp="1577263342782" />
+    <state x="440" y="177" key="#Inspections" timestamp="1578635959272">
+      <screen x="0" y="23" width="1680" height="978" />
+    </state>
+    <state x="440" y="177" key="#Inspections/0.23.1680.978/1680.23.1920.1057@0.23.1680.978" timestamp="1578635959272" />
     <state x="440" y="177" key="#Notifications" timestamp="1577259811326">
       <screen x="0" y="23" width="1680" height="978" />
     </state>
@@ -96,9 +104,10 @@
       <screen x="1680" y="23" width="1920" height="1057" />
     </state>
     <state x="2201" y="155" width="639" height="714" key="find.popup/0.23.1680.978/1680.23.1920.1057@1680.23.1920.1057" timestamp="1578367391982" />
-    <state x="2186" y="238" width="670" height="676" key="search.everywhere.popup" timestamp="1578365424274">
-      <screen x="1680" y="23" width="1920" height="1057" />
+    <state x="443" y="222" width="670" height="626" key="search.everywhere.popup" timestamp="1578636211369">
+      <screen x="0" y="23" width="1680" height="978" />
     </state>
+    <state x="443" y="222" width="670" height="626" key="search.everywhere.popup/0.23.1680.978/1680.23.1920.1057@0.23.1680.978" timestamp="1578636211369" />
     <state x="2186" y="238" width="670" height="676" key="search.everywhere.popup/0.23.1680.978/1680.23.1920.1057@1680.23.1920.1057" timestamp="1578365424274" />
   </component>
 </project>
