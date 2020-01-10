@@ -44,6 +44,12 @@ func init() {
 	beego.Router("/v1/admin/article/createArticle", &admin.ArticleController{}, "put:CreateArticle")
 	beego.Router("/v1/admin/article/uploadImage", &admin.ArticleController{}, "post:UploadImage")
 	beego.Router("/v1/admin/article/updateArticle", &admin.ArticleController{}, "post:UpdateArticle")
+
+	// ----------- page -----------------
+	beego.Router("/v1/admin/page/pageList", &admin.PageController{}, "get:PageList")
+	beego.Router("/v1/admin/page/createPage", &admin.PageController{}, "put:CreatePage")
+	beego.Router("/v1/admin/page/detail", &admin.PageController{}, "get:Detail")
+	beego.Router("/v1/admin/page/updatePage", &admin.PageController{}, "post:UpdatePage")
 }
 
 //var FilterUser = func(ctx *context.Context) {
