@@ -13,13 +13,13 @@ const (
 func init() {
 	// session config
 	beego.BConfig.WebConfig.Session.SessionOn = true
-	beego.BConfig.WebConfig.Session.SessionName = "SESSIONID"
+	beego.BConfig.WebConfig.Session.SessionName = "SESSIONWKK"
 	beego.BConfig.WebConfig.Session.SessionCookieLifeTime = ONE_DAY
 	beego.BConfig.WebConfig.Session.SessionGCMaxLifetime = 3600
 
 	//blog
     beego.Router("/", &controllers.MainController{})
-	beego.Router("/about", &controllers.MainController{}, "get:About")
+	beego.Router("/page/:slug([\\w]+).html", &controllers.MainController{}, "get:PageInfo")
 	beego.Router("/article/:slug([\\w\\-]+).html", &controllers.MainController{}, "get:ArticleInfo")
 
 	// admin

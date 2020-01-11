@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"github.com/astaxie/beego/orm"
 	"github.com/wkekai/goblog/helper"
 	"net/http"
@@ -32,7 +31,6 @@ func Login(name, password, ip string) *LoginRes {
 	o := orm.NewOrm()
 	user := AdminUser{Name: name}
 	o.Read(&user, "name")
-	fmt.Println(user)
 
 	if user.Password == "" {
 		return &LoginRes{http.StatusNoContent, 0, ""}

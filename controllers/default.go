@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/wkekai/goblog/models"
 	"strings"
@@ -10,7 +9,7 @@ import (
 )
 
 type MainController struct {
-	beego.Controller
+	BaseController
 }
 
 type ArticleInfo struct {
@@ -44,7 +43,6 @@ func (c *MainController) Get() {
 	var articleList ArticleList
 	var articleInfos []ArticleInfo
 
-	o := orm.NewOrm()
 	qb, _ := orm.NewQueryBuilder("mysql")
 	sql := qb.Select(
 		"article.*",
@@ -55,13 +53,13 @@ func (c *MainController) Get() {
 		OrderBy("article.id").Desc().
 		Limit(10).Offset(0).String()
 
-	o.Raw(sql).QueryRows(&articleInfos)
+	c.o.Raw(sql).QueryRows(&articleInfos)
 
-	articleList.Total, _ = o.QueryTable(new(models.Article)).Filter("is_draft", 2).Count()
+	articleList.Total, _ = c.o.QueryTable(new(models.Article)).Filter("is_draft", 2).Count()
 	articleList.Data = articleInfos
 
 	c.Data["Data"] = articleList.Data
-	c.Data["Website"] = "wangkekai.com"
+	c.Data["Title"] = "blog"
 	c.Data["Email"] = "wkekai@163.com"
 	c.TplName = "index.html"
 }
@@ -69,21 +67,20 @@ func (c *MainController) Get() {
 func (c * MainController) ArticleInfo() {
 	slug := c.Ctx.Input.Param(":slug") + ".html"
 
-	o := orm.NewOrm()
 	info := models.Article{Slug: slug}
-	o.Read(&info, "slug")
+	c.o.Read(&info, "slug")
 	fmt.Println(info)
 
 	// get tag list
 	var tags orm.ParamsList
 	tagsId := strings.Split(info.TagIds, ",")
 
-	qs := o.QueryTable(new(models.Tag))
+	qs := c.o.QueryTable(new(models.Tag))
 	qs.Filter("id__in", tagsId).ValuesFlat(&tags, "name")
 
 	// get category info
 	var category models.Category
-	qs = o.QueryTable(new(models.Category))
+	qs = c.o.QueryTable(new(models.Category))
 	qs.Filter("id", info.CategoryId).One(&category, "name")
 
 	c.Data["info"] = info
@@ -93,6 +90,14 @@ func (c * MainController) ArticleInfo() {
 	c.TplName = "article.html"
 }
 
-func (c *MainController) About() {
-	c.TplName = "about.html"
+func (this *MainController) PageInfo() {
+	slug := this.Ctx.Input.Param(":slug")
+
+	info := models.PageInfo{Slug: slug}
+	this.o.Read(&info, "slug")
+
+	this.Data["info"] = info
+	this.Data["Title"] = slug
+
+	this.TplName = "page.html"
 }
