@@ -13,6 +13,7 @@ import (
 	"github.com/wkekai/goblog/models"
 	"os"
 	"path"
+	"strings"
 	"time"
 )
 
@@ -294,19 +295,50 @@ func (article *ArticleController) CreateArticle() {
 	resp := helper.NewResponse()
 	defer resp.WriteJson(article.Ctx.ResponseWriter)
 
+
+
 	var articleInfo models.Article
 	json.Unmarshal(article.Ctx.Input.RequestBody, &articleInfo)
-	fmt.Println(articleInfo)
 
+	query := article.o.QueryTable(new(models.Article))
+
+	slugNum, _ := query.Filter("slug", articleInfo.Slug).Count()
+
+	if slugNum > 0 {
+		resp.Status = RS.RS_tag_exist
+		resp.Tips(helper.WARNING, RS.Desc(RS.RS_tag_exist))
+		return
+	}
+
+	// get previous
+	var preArticle models.Article
+	query.OrderBy("-id").One(&preArticle)
+
+	articleInfo.Previous = preArticle.Slug
 	articleInfo.Created = time.Now()
 
 	id, err := article.o.Insert(&articleInfo)
-	fmt.Println(err)
+
 	if err != nil {
 		resp.Status = RS.RS_create_failed
 		resp.Tips(helper.WARNING, RS.Desc(RS.RS_create_failed))
 		return
 	}
+
+	// update previous's next
+	preArticle.Next = articleInfo.Slug
+	article.o.Update(&preArticle)
+
+	// update category count
+	article.o.QueryTable(new(models.Category)).Filter("id", articleInfo.CategoryId).Update(orm.Params{
+		"link_article": orm.ColValue(orm.ColAdd, 1),
+	})
+
+	// update tags uses
+	tags := strings.Split(articleInfo.TagIds, ",")
+	article.o.QueryTable(new(models.Tag)).Filter("id__in", tags).Update(orm.Params{
+		"use_times": orm.ColValue(orm.ColAdd, 1),
+	})
 
 	resp.Data = id
 }
@@ -384,6 +416,16 @@ func (article *ArticleController) UpdateArticle() {
 		return
 	}
 
+	// change is category same
+	if info.CategoryId != articleInfo.CategoryId {
+		article.o.QueryTable(new(models.Category)).Filter("id", articleInfo.CategoryId).Update(orm.Params{
+			"link_article": orm.ColValue(orm.ColAdd, 1),
+		})
+		article.o.QueryTable(new(models.Category)).Filter("id", info.CategoryId).Update(orm.Params{
+			"link_article": orm.ColValue(orm.ColMinus, 1),
+		})
+	}
+
 	info.Title = articleInfo.Title
 	info.CategoryId = articleInfo.CategoryId
 	info.DisplayTime = articleInfo.DisplayTime
@@ -394,11 +436,12 @@ func (article *ArticleController) UpdateArticle() {
 	info.IsDraft = articleInfo.IsDraft
 	info.Updated = time.Now()
 
-	if num, err := article.o.Update(&info); err != nil {
+	num, err := article.o.Update(&info)
+	if err != nil {
 		resp.Status = RS.RS_update_failed
 		resp.Tips(helper.WARNING, RS.Desc(RS.RS_update_failed))
 		return
-	} else {
-		resp.Data = num
 	}
+
+	resp.Data = num
 }

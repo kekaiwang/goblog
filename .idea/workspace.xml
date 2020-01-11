@@ -6,10 +6,9 @@
       <change beforePath="$PROJECT_DIR$/controllers/admin/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/article.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/default.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/default.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goblog" beforeDir="false" afterPath="$PROJECT_DIR$/goblog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/category.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/category.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/tag.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/tag.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/article.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/article.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/article.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/head.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +21,7 @@
       <list>
         <option value="HTML File" />
         <option value="Go File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -53,6 +53,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">

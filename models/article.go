@@ -12,8 +12,8 @@ type Article struct {
 	CategoryId int
 	TagIds string
 	Excerpt string
-	Previous int
-	Next int
+	Previous string
+	Next string
 	Preview int
 	Slug string
 	IsDraft int

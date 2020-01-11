@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"github.com/astaxie/beego/orm"
 	"github.com/wkekai/goblog/models"
 	"strings"
@@ -69,7 +68,21 @@ func (c * MainController) ArticleInfo() {
 
 	info := models.Article{Slug: slug}
 	c.o.Read(&info, "slug")
-	fmt.Println(info)
+
+	// get previous or next
+	previousTitle := models.Article{Slug: info.Previous}
+	if info.Previous != "" {
+		c.o.QueryTable(new(models.Article)).Filter("slug", previousTitle.Slug).One(&previousTitle, "title")
+	}
+
+	nextTitle := models.Article{Slug: info.Next}
+	if info.Next != "" {
+		c.o.QueryTable(new(models.Article)).Filter("slug", nextTitle.Slug).One(&nextTitle, "title")
+	}
+
+	if info.Next != "" {
+		c.o.QueryTable(new(models.Article)).Filter("slug", previousTitle.Slug).One(&previousTitle, "title")
+	}
 
 	// get tag list
 	var tags orm.ParamsList
@@ -86,6 +99,8 @@ func (c * MainController) ArticleInfo() {
 	c.Data["info"] = info
 	c.Data["tags"] = tags
 	c.Data["category"] = category.Name
+	c.Data["previousTitle"] = previousTitle.Title
+	c.Data["nextTitle"] = nextTitle.Title
 	c.Data["Title"] = info.Title
 	c.TplName = "article.html"
 }

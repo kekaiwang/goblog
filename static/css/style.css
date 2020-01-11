@@ -109,7 +109,8 @@ a:first-child h1,a:first-child h2,a:first-child h3,a:first-child h4,a:first-chil
 a {
     text-decoration: none;
     color: #313131;
-    outline: 0
+    outline: 0;
+    cursor: pointer;
 }
 
 a:active,a:focus,a:hover {
@@ -856,7 +857,7 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 
 .post-onelist-item-container {
     position: relative;
-    max-width: 680px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 70px 20px 65px
 }
@@ -937,8 +938,8 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 }
 
 .page-page {
-    max-width: 700px;
-    padding: 130px 25px 20px
+    max-width: 900px;
+    padding: 90px 25px 20px
 }
 
 .post-content p {
@@ -1429,6 +1430,100 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 
 .lists-navigator ol li.current a {
     color: #6fa3ef
+}
+
+/* ps css */
+.post-copyright {
+    margin: 0 0 0;
+    padding: 0.5em 1em;
+    border-left: 3px solid #ff1700;
+    background-color: #f9f9f9;
+    list-style: none;
+}
+
+.post-copyright ul {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.post-copyright a {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    background-color: transparent;
+    color: #555;
+    text-decoration: none;
+    outline: none;
+    border-bottom: 1px solid #999;
+    cursor: pointer;
+}
+
+.post-copyright a:hover {
+    color: #222;
+    border-bottom-color: #222;
+}
+
+/* post-footer */
+.post-footer {
+    display: block;
+}
+
+.post-footer .post-tags {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.post-footer .post-tags a {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 13px;
+}
+
+.post-nav {
+    display: table;
+    width: 100%;
+    /*border-top: 1px solid #eee;*/
+}
+
+.post-nav .post-nav-item {
+    display: table-cell;
+    padding: 10px 0 0 0;
+    width: 45%;
+    vertical-align: top;
+}
+
+.post-nav-next a {
+    padding-left: 5px;
+}
+
+.post-nav-divider {
+    display: table-cell;
+    width: 10%;
+}
+
+.post-nav-item a {
+    position: relative;
+    display: block;
+    line-height: 25px;
+    font-size: 14px;
+    color: #555;
+    border-bottom: none;
+}
+
+.post-nav-prev {
+    text-align: right;
+}
+
+.post-nav-prev .fa {
+    margin-left: 5px;
+}
+
+.post-nav-item .fa {
+    font-size: 12px;
+    margin-right: 5px;
 }
 
 #comments .lists-navigator {
