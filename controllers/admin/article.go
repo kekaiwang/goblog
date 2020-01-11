@@ -92,6 +92,7 @@ func (article *ArticleController) UpdateTag() {
 	}
 
 	info.Name = tag.Name
+	info.RouterLink = tag.RouterLink
 	info.Status = tag.Status
 	info.Updated = time.Now()
 
@@ -177,6 +178,7 @@ func (article *ArticleController) UpdateCategory() {
 	}
 
 	info.Name = category.Name
+	info.RouterLink = category.RouterLink
 	info.Status = category.Status
 	info.Updated = time.Now()
 

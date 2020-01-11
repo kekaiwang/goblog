@@ -101,3 +101,7 @@ func (this *MainController) PageInfo() {
 
 	this.TplName = "page.html"
 }
+
+func (this *MainController) Archives() {
+
+}
