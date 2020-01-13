@@ -43,7 +43,7 @@
         <footer class="post-footer">
             <p class="post-tags">
                 {{ range $elem := .tags }}
-                    <a href="/tags/{{$elem.RouterLink}}">
+                    <a href="/tags/{{$elem.RouterLink}}?type={{$elem.Name}}">
                         {{ $elem.Name }}
                     </a>
                 {{ end }}

@@ -156,7 +156,7 @@ func (this *MainController) Categories() {
 		meta Meta
 		data []CategoryInfo
 		total int64
-		pagesize int = 5
+		pagesize int = 6
 		page int
 		offset int
 		uris []string
@@ -198,27 +198,28 @@ func (this *MainController) Categories() {
 		this.o.Raw("select count(*) as total from wkk_category a left join wkk_article b on a.id = b.category_id " +
 			"where a.router_link = ? and b.is_draft < 3", link).QueryRow(&total)
 	} else if uris[1] == "tags" {
-		meta.Name = "分类"
+		meta.Name = "标签"
 
 		qb, _ := orm.NewQueryBuilder("mysql")
 		sql := qb.Select(
-			"a.id",
+			"c.id",
 			"a.name",
-			"b.title",
-			"b.slug",
-			"b.display_time",
+			"c.title",
+			"c.slug",
+			"c.display_time",
 		).
-			From("wkk_category as a").
-			LeftJoin("wkk_article as b").On("a.id = b.category_id").
+			From("wkk_tag as a").
+			LeftJoin("wkk_article_relation as b").On("a.id = b.tag_id").
+			LeftJoin("wkk_article as c").On("b.article_id = c.id").
 			Where("a.router_link = ?").
-			And("b.is_draft < 3").
-			OrderBy("b.id").Desc().
+			And("c.is_draft < 3").
+			OrderBy("c.id").Desc().
 			Limit(pagesize).Offset(offset).String()
 
 		this.o.Raw(sql, link).QueryRows(&data)
 
-		this.o.Raw("select count(*) as total from wkk_category a left join wkk_article b on a.id = b.category_id " +
-			"where a.router_link = ? and b.is_draft < 3", link).QueryRow(&total)
+		this.o.Raw("select count(*) as total from wkk_tag a left join wkk_article_relation b on a.id = b.tag_id " +
+			"left join wkk_article c on b.article_id = c.id where a.router_link = ? and c.is_draft < 3", link).QueryRow(&total)
 	}
 
 	this.Data["Data"] = data
