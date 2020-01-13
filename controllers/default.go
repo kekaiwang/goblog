@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"github.com/astaxie/beego/orm"
 	"github.com/wkekai/goblog/helper"
 	"github.com/wkekai/goblog/models"
@@ -103,11 +102,11 @@ func (c * MainController) ArticleInfo() {
 	}
 
 	// get tag list
-	var tags orm.ParamsList
+	var tags []*models.Tag
 	tagsId := strings.Split(info.TagIds, ",")
 
 	qs := c.o.QueryTable(new(models.Tag))
-	qs.Filter("id__in", tagsId).ValuesFlat(&tags, "name")
+	qs.Filter("id__in", tagsId).All(&tags)
 
 	// get category info
 	var category models.Category
@@ -139,9 +138,94 @@ func (this *MainController) Archives() {
 
 }
 
-func (this *MainController) Categories() {
-	link := this.Ctx.Input.Param(":link")
-	fmt.Println(link, 1231312)
+type CategoryInfo struct {
+	Id int
+	Name string
+	Title string
+	Slug string
+	DisplayTime time.Time
+}
 
+type Meta struct {
+	Type string
+	Name string
+}
+
+func (this *MainController) Categories() {
+	var (
+		meta Meta
+		data []CategoryInfo
+		total int64
+		pagesize int = 5
+		page int
+		offset int
+		uris []string
+		link string
+	)
+
+	uris = strings.Split(this.Ctx.Input.URL(), "/")
+
+	link = this.Ctx.Input.Param(":link") + ".html"
+
+	if page, _ = this.GetInt("page"); page < 1 {
+		page = 1
+	}
+
+	offset = (page - 1) * pagesize
+
+	meta.Type = this.GetString("type")
+
+	if uris[1] == "categories" {
+		meta.Name = "分类"
+
+		qb, _ := orm.NewQueryBuilder("mysql")
+		sql := qb.Select(
+			"a.id",
+			"a.name",
+			"b.title",
+			"b.slug",
+			"b.display_time",
+		).
+			From("wkk_category as a").
+			LeftJoin("wkk_article as b").On("a.id = b.category_id").
+			Where("a.router_link = ?").
+			And("b.is_draft < 3").
+			OrderBy("b.id").Desc().
+			Limit(pagesize).Offset(offset).String()
+
+		this.o.Raw(sql, link).QueryRows(&data)
+
+		this.o.Raw("select count(*) as total from wkk_category a left join wkk_article b on a.id = b.category_id " +
+			"where a.router_link = ? and b.is_draft < 3", link).QueryRow(&total)
+	} else if uris[1] == "tags" {
+		meta.Name = "分类"
+
+		qb, _ := orm.NewQueryBuilder("mysql")
+		sql := qb.Select(
+			"a.id",
+			"a.name",
+			"b.title",
+			"b.slug",
+			"b.display_time",
+		).
+			From("wkk_category as a").
+			LeftJoin("wkk_article as b").On("a.id = b.category_id").
+			Where("a.router_link = ?").
+			And("b.is_draft < 3").
+			OrderBy("b.id").Desc().
+			Limit(pagesize).Offset(offset).String()
+
+		this.o.Raw(sql, link).QueryRows(&data)
+
+		this.o.Raw("select count(*) as total from wkk_category a left join wkk_article b on a.id = b.category_id " +
+			"where a.router_link = ? and b.is_draft < 3", link).QueryRow(&total)
+	}
+
+	this.Data["Data"] = data
+	this.Data["Total"] = total
+	this.Data["CurrentPage"] = page
+	this.Data["TotalPage"] = helper.NewTotalPage(total, pagesize)
+	this.Data["meta"] = meta
+	this.Data["Title"] = "分类"
 	this.TplName = "category.html"
 }

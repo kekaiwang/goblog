@@ -13,7 +13,7 @@
                 </time>
                 <span class="post-meta-divider">|</span>
                 <i class="fa fa-folder-o"></i>
-                <a href="/categories/{{.category.RouterLink}}">
+                <a href="/categories/{{.category.RouterLink}}?type={{.category.Name}}">
                     {{.category.Name}}
                 </a>
 {{/*                with*/}}
@@ -43,8 +43,8 @@
         <footer class="post-footer">
             <p class="post-tags">
                 {{ range $elem := .tags }}
-                    <a href="">
-                        {{ $elem }}
+                    <a href="/tags/{{$elem.RouterLink}}">
+                        {{ $elem.Name }}
                     </a>
                 {{ end }}
             </p>

@@ -13,6 +13,7 @@ import (
 	"github.com/wkekai/goblog/models"
 	"os"
 	"path"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -295,8 +296,6 @@ func (article *ArticleController) CreateArticle() {
 	resp := helper.NewResponse()
 	defer resp.WriteJson(article.Ctx.ResponseWriter)
 
-
-
 	var articleInfo models.Article
 	json.Unmarshal(article.Ctx.Input.RequestBody, &articleInfo)
 
@@ -317,6 +316,7 @@ func (article *ArticleController) CreateArticle() {
 	articleInfo.Previous = preArticle.Slug
 	articleInfo.Created = time.Now()
 
+	// insert article
 	id, err := article.o.Insert(&articleInfo)
 
 	if err != nil {
@@ -325,6 +325,15 @@ func (article *ArticleController) CreateArticle() {
 		return
 	}
 
+	// update tags uses
+	tags := strings.Split(articleInfo.TagIds, ",")
+	article.o.QueryTable(new(models.Tag)).Filter("id__in", tags).Update(orm.Params{
+		"use_times": orm.ColValue(orm.ColAdd, 1),
+	})
+
+	// insert tag relation
+	article.UpdateArticleRelation(1, id, tags)
+
 	// update previous's next
 	preArticle.Next = articleInfo.Slug
 	article.o.Update(&preArticle)
@@ -332,12 +341,6 @@ func (article *ArticleController) CreateArticle() {
 	// update category count
 	article.o.QueryTable(new(models.Category)).Filter("id", articleInfo.CategoryId).Update(orm.Params{
 		"link_article": orm.ColValue(orm.ColAdd, 1),
-	})
-
-	// update tags uses
-	tags := strings.Split(articleInfo.TagIds, ",")
-	article.o.QueryTable(new(models.Tag)).Filter("id__in", tags).Update(orm.Params{
-		"use_times": orm.ColValue(orm.ColAdd, 1),
 	})
 
 	resp.Data = id
@@ -443,5 +446,27 @@ func (article *ArticleController) UpdateArticle() {
 		return
 	}
 
+	article.UpdateArticleRelation(2, int64(articleInfo.Id), strings.Split(articleInfo.TagIds, ","))
+
 	resp.Data = num
+}
+
+func (article *ArticleController) UpdateArticleRelation(tagType int, articleId int64, tagsId []string) {
+	if tagType == 2 { // delete and insert
+		article.o.QueryTable(new(models.ArticleRelation)).Filter("article_id", articleId).Delete()
+	}
+
+	// insert tags
+	var articleRelation []*models.ArticleRelation
+
+	for _, v := range tagsId {
+		newValue, _ := strconv.Atoi(v)
+
+		articleRelation = append(articleRelation, &models.ArticleRelation{
+			ArticleId: articleId,
+			TagId:     newValue,
+		})
+	}
+
+	article.o.InsertMulti(100, articleRelation)
 }
