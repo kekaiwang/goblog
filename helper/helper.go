@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"math"
 	"math/rand"
 	"net/http"
 )
@@ -76,4 +77,13 @@ func RandString(n int) string {
 		b[i] = letters[rand.Intn(len(letters))]
 	}
 	return string(b)
+}
+
+func NewTotalPage(total int64, pagesize int) int {
+	pages := float64(pagesize)
+	totalp := float64(total)
+
+	totalPage := math.Ceil(totalp/pages)
+
+	return int(totalPage)
 }

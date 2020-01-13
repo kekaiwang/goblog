@@ -22,6 +22,7 @@ func init() {
 	beego.Router("/page/:slug([\\w]+).html", &controllers.MainController{}, "get:PageInfo")
 	beego.Router("/article/:slug([\\w\\-]+).html", &controllers.MainController{}, "get:ArticleInfo")
 	beego.Router("/archives.html", &controllers.MainController{}, "get:Archives")
+	beego.Router("/categories/:link([\\w]+).html", &controllers.MainController{}, "get:Categories")
 
 	// admin
 	//beego.InsertFilter("/v1/admin/*", beego.BeforeRouter, FilterUser)

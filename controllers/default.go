@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/astaxie/beego/orm"
+	"github.com/wkekai/goblog/helper"
 	"github.com/wkekai/goblog/models"
 	"strings"
 	"time"
@@ -31,6 +33,7 @@ type ArticleInfo struct {
 	Updated time.Time
 	DisplayTime time.Time
 	CategoryName  string
+	CategoryLink string
 }
 
 type ArticleList struct {
@@ -39,18 +42,30 @@ type ArticleList struct {
 }
 
 func (c *MainController) Get() {
-	var articleList ArticleList
-	var articleInfos []ArticleInfo
+	var (
+		articleList ArticleList
+		articleInfos []ArticleInfo
+		pagesize int = 5
+		page int
+		offset int
+	)
+
+	if page, _ = c.GetInt("page"); page < 1 {
+		page = 1
+	}
+
+	offset = (page - 1) * pagesize
 
 	qb, _ := orm.NewQueryBuilder("mysql")
 	sql := qb.Select(
 		"article.*",
-		"category.name as category_name").
+		"category.name as category_name",
+		"category.router_link as category_link").
 		From("wkk_article as article").
 		LeftJoin("wkk_category as category").On("article.category_id = category.id").
 		Where("article.is_draft < 3").
 		OrderBy("article.id").Desc().
-		Limit(10).Offset(0).String()
+		Limit(pagesize).Offset(offset).String()
 
 	c.o.Raw(sql).QueryRows(&articleInfos)
 
@@ -58,6 +73,9 @@ func (c *MainController) Get() {
 	articleList.Data = articleInfos
 
 	c.Data["Data"] = articleList.Data
+	c.Data["Total"] = articleList.Total
+	c.Data["CurrentPage"] = page
+	c.Data["TotalPage"] = helper.NewTotalPage(articleList.Total, pagesize)
 	c.Data["Title"] = "blog"
 	c.Data["Email"] = "wkekai@163.com"
 	c.TplName = "index.html"
@@ -94,11 +112,11 @@ func (c * MainController) ArticleInfo() {
 	// get category info
 	var category models.Category
 	qs = c.o.QueryTable(new(models.Category))
-	qs.Filter("id", info.CategoryId).One(&category, "name")
+	qs.Filter("id", info.CategoryId).One(&category, "name", "router_link")
 
 	c.Data["info"] = info
 	c.Data["tags"] = tags
-	c.Data["category"] = category.Name
+	c.Data["category"] = category
 	c.Data["previousTitle"] = previousTitle.Title
 	c.Data["nextTitle"] = nextTitle.Title
 	c.Data["Title"] = info.Title
@@ -119,4 +137,11 @@ func (this *MainController) PageInfo() {
 
 func (this *MainController) Archives() {
 
+}
+
+func (this *MainController) Categories() {
+	link := this.Ctx.Input.Param(":link")
+	fmt.Println(link, 1231312)
+
+	this.TplName = "category.html"
 }

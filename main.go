@@ -14,6 +14,20 @@ func init() {
 
 func main() {
 	orm.Debug = true
+
+	beego.AddFuncMap("sub", sub)
+	beego.AddFuncMap("add", add)
+
 	beego.Run()
+}
+
+func sub(in int)(out int){
+	out = in - 1
+	return
+}
+
+func add(in int)(out int){
+	out = in + 1
+	return
 }
 

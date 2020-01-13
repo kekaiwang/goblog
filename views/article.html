@@ -7,24 +7,21 @@
             </h1>
 
             <div class="post-data">
-                <time datetime="{{date .info.DisplayTime "m d, Y"}}" itemprop="datePublished">
-                    Published on {{date .info.DisplayTime "m d, Y"}}
+                <i class="fa fa-calendar-o"></i> 发表于
+                <time datetime="{{date .info.DisplayTime "Y-m-d"}}" itemprop="datePublished">
+                    {{date .info.DisplayTime "Y-m-d"}}
                 </time>
-                in
-                <a href="">
-                    {{.category}}
+                <span class="post-meta-divider">|</span>
+                <i class="fa fa-folder-o"></i>
+                <a href="/categories/{{.category.RouterLink}}">
+                    {{.category.Name}}
                 </a>
-                with
-                <a href="#comments">&nbsp;&nbsp;0&nbsp;&nbsp;comment</a></div>
+{{/*                with*/}}
+{{/*                <a href="#comments">&nbsp;&nbsp;0&nbsp;&nbsp;comment</a>*/}}
+            </div>
         </div>
         <div id="post-content" class="post-content" itemprop="articleBody">
-            <p class="post-tags">
-                {{ range $elem := .tags }}
-                <a href="">
-                    {{ $elem }}
-                </a>
-                {{ end }}
-            </p>
+
             {{ str2html .info.Content }}
 
             <div>
@@ -42,32 +39,34 @@
                     </li>
                 </ul>
             </div>
-
-            <footer class="post-footer">
-                <div class="post-tags">
-                    <a href="/tags/newifi3/" rel="tag"># newifi3</a>
-                </div>
-                <div class="post-nav">
-                    {{ if .info.Previous }}
+        </div>
+        <footer class="post-footer">
+            <p class="post-tags">
+                {{ range $elem := .tags }}
+                    <a href="">
+                        {{ $elem }}
+                    </a>
+                {{ end }}
+            </p>
+            <div class="post-nav">
+                {{ if .info.Previous }}
                     <div class="post-nav-next post-nav-item">
                         <a href="/article/{{.info.Previous}}" rel="next" title="{{.previousTitle}}">
                             <i class="fa fa-chevron-left"></i> {{.previousTitle}}
                         </a>
                     </div>
-                    {{end}}
-                    <span class="post-nav-divider"></span>
-                    {{if .info.Next}}
+                {{end}}
+                <span class="post-nav-divider"></span>
+                {{if .info.Next}}
                     <div class="post-nav-prev post-nav-item">
                         <a href="/article/{{.info.Next}}" rel="prev" title="{{.nextTitle}}">
                             {{.nextTitle}}
                             <i class="fa fa-chevron-right"></i>
                         </a>
                     </div>
-                    {{end}}
-                </div>
-            </footer>
-
-        </div>
+                {{end}}
+            </div>
+        </footer>
     </article>
 </div>
 {{ template "foot.html" . }}

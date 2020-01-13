@@ -34,7 +34,7 @@ html {
 }
 
 body {
-    font: 16px 'PT Serif', 'STZhongsong', '华文中宋', 'Microsoft Yahei', serif;
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
     font-size: 14px;
     line-height: 1.8;
     margin: 0 auto;
@@ -942,6 +942,10 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     padding: 90px 25px 20px
 }
 
+.post-content {
+    padding-top: 50px;
+}
+
 .post-content p {
     font-size: 14px;
     word-wrap: break-word;
@@ -1029,12 +1033,22 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 }
 
 .post-title {
-    font-size: 21px
+    font-size: 21px;
 }
 
 .post-data,.post-data a {
     font-size: 12px;
-    color: #5f5f5f
+    color: #5f5f5f;
+}
+
+.item-meta time,
+.post-data time {
+    border-bottom: 1px dashed #999;
+    cursor: help;
+}
+
+.post-meta-divider {
+    margin: 0 0.5em;
 }
 
 .post-tags {
@@ -1305,6 +1319,10 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 
 .post-list-item-container .item-label.bg-orange .item-meta .item-meta-date {
     color: #fff
+}
+
+.post-header {
+    text-align: center;
 }
 
 .post-header-thumb {
