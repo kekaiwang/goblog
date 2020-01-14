@@ -1,9 +1,14 @@
 package routers
 
 import (
+	"encoding/json"
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/context"
+	"github.com/wkekai/goblog/RS"
 	"github.com/wkekai/goblog/controllers"
 	"github.com/wkekai/goblog/controllers/admin"
+	"github.com/wkekai/goblog/helper"
+	"github.com/wkekai/goblog/models"
 	"html/template"
 	"net/http"
 )
@@ -28,7 +33,7 @@ func init() {
 	beego.Router("/tags/:link([\\w]+).html", &controllers.MainController{}, "get:Categories")
 
 	// admin
-	//beego.InsertFilter("/v1/admin/*", beego.BeforeRouter, FilterUser)
+	beego.InsertFilter("/v1/admin/*", beego.BeforeRouter, FilterUser)
 	beego.Router("/v1/admin/login", &admin.UserController{}, "post:Login")
 	beego.Router("/v1/admin/getInfo", &admin.UserController{}, "get:GetInfo")
 	beego.Router("/v1/admin/logout", &admin.UserController{}, "post:Logout")
@@ -70,17 +75,45 @@ func HttpNotFound(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//var FilterUser = func(ctx *context.Context) {
-//	val, ok := ctx.Input.Session(admin.SESSIONNAME).(string)
-//
-//	if !ok || val == "" {
-//		if ctx.Request.Method == "GET" {
-//			ctx.Redirect(302, "login")
-//		} else if ctx.Request.Method == "POST" {
-//			resp := helper.NewResponse()
-//			resp.Status = RS.RS_user_not_login
-//			resp.Data = "/login"
-//			resp.WriteJson(ctx.ResponseWriter)
-//		}
-//	}
-//}
+var FilterUser = func(ctx *context.Context) {
+	token := ctx.Input.Cookie("Admin-Token")
+
+	resp := helper.NewResponse()
+
+	if token == "" {
+		var user admin.UserParams
+
+		err := json.Unmarshal(ctx.Input.RequestBody, &user)
+
+		if err != nil {
+			resp.Status = RS.RS_user_not_login
+			resp.Tips(helper.ERROR, "信息错误")
+			resp.WriteJson(ctx.ResponseWriter)
+			return
+		}
+
+		status := models.Login(user.Username, user.Password, ctx.Input.IP())
+
+		resp.Status = status.Status
+
+		switch status.Status {
+		case 204:
+			resp.Status = RS.RS_user_not_login
+			resp.Tips(helper.ERROR, "管理员账号错误")
+			resp.WriteJson(ctx.ResponseWriter)
+			return
+		case 401:
+			resp.Status = RS.RS_user_not_login
+			resp.Tips(helper.WARNING, "管理员账号/密码错误")
+			resp.WriteJson(ctx.ResponseWriter)
+			return
+		}
+	} else {
+		if token != beego.AppConfig.String("Token") {
+			resp.Status = RS.RS_user_not_login
+			resp.Tips(helper.WARNING, "管理员账号/密码错误")
+			resp.WriteJson(ctx.ResponseWriter)
+			return
+		}
+	}
+}
