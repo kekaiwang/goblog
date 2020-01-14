@@ -434,6 +434,7 @@ func (article *ArticleController) UpdateArticle() {
 	info.Excerpt = articleInfo.Excerpt
 	info.DisplayTime = articleInfo.DisplayTime
 	info.TagIds = articleInfo.TagIds
+	info.Thumb = articleInfo.Thumb
 	info.Slug = articleInfo.Slug
 	info.Content = articleInfo.Content
 	info.Markdown = articleInfo.Markdown

@@ -6,6 +6,12 @@
             {{ range $index, $elem := .Data }}
                 <div class="post-onelist-item">
                     <div class="post-onelist-item-container">
+                        {{if $elem.Thumb }}
+                        <a href="/article/{{$elem.Slug}}">
+                            <div class="onelist-item-thumb bg-deepgrey" style="background-image:url({{$elem.Thumb}});"></div>
+                        </a>
+                        {{end}}
+
                         <div class="onelist-item-info">
                             <div class="item-title">
                                 <a class="post-item-title" href="/article/{{$elem.Slug}}">

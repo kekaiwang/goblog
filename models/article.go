@@ -15,6 +15,7 @@ type Article struct {
 	Previous string
 	Next string
 	Preview int
+	Thumb string
 	Slug string
 	IsDraft int
 	Created time.Time

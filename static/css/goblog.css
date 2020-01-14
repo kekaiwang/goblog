@@ -432,8 +432,6 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 .headband {
     height: 3px;
     background: #222;
-    position: absolute;
-    z-index: 100px;
 }
 
 .header {
