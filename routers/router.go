@@ -4,6 +4,8 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/wkekai/goblog/controllers"
 	"github.com/wkekai/goblog/controllers/admin"
+	"html/template"
+	"net/http"
 )
 
 const (
@@ -53,6 +55,19 @@ func init() {
 	beego.Router("/v1/admin/page/createPage", &admin.PageController{}, "put:CreatePage")
 	beego.Router("/v1/admin/page/detail", &admin.PageController{}, "get:Detail")
 	beego.Router("/v1/admin/page/updatePage", &admin.PageController{}, "post:UpdatePage")
+
+	beego.ErrorHandler("404", HttpNotFound)
+}
+
+func HttpNotFound(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("views/404.html")
+	if err != nil {
+		panic(err)
+	}
+	err = t.Execute(w, "")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 //var FilterUser = func(ctx *context.Context) {

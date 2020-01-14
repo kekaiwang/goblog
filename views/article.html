@@ -7,17 +7,30 @@
             </h1>
 
             <div class="post-data">
-                <i class="fa fa-calendar-o"></i> 发表于
-                <time datetime="{{date .info.DisplayTime "Y-m-d"}}" itemprop="datePublished">
-                    {{date .info.DisplayTime "Y-m-d"}}
-                </time>
-                <span class="post-meta-divider">|</span>
-                <i class="fa fa-folder-o"></i>
-                <a href="/categories/{{.category.RouterLink}}?type={{.category.Name}}">
-                    {{.category.Name}}
-                </a>
-{{/*                with*/}}
-{{/*                <a href="#comments">&nbsp;&nbsp;0&nbsp;&nbsp;comment</a>*/}}
+                <span class="item-meta-time">
+                    <i class="fa fa-calendar-o"></i> 发表于
+                    <time datetime="{{date .info.DisplayTime "Y-m-d"}}" itemprop="datePublished">
+                        {{date .info.DisplayTime "Y-m-d"}}
+                    </time>
+                </span>
+
+                <span class="item-mete-category">
+                    <span class="post-meta-divider">|</span>
+                    <i class="fa fa-folder-o"></i>
+                    <a class="item-category" href="/categories/{{.category.RouterLink}}?type={{.category.Name}}">
+                        {{.category.Name}}
+                    </a>
+                </span>
+
+                <span class="item-meta-comment">
+                    <span class="post-meta-divider">|</span>
+                    <i class="fa fa-comment-o"></i>
+                    comment...
+                </span>
+            </div>
+
+            <div class="post-data-excerpt">
+                {{.info.Excerpt}}
             </div>
         </div>
         <div id="post-content" class="post-content" itemprop="articleBody">

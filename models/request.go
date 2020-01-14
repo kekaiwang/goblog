@@ -54,3 +54,35 @@ func (m *RequestManage) SaveRequest() {
 		}
 	}
 }
+
+func (m *ManageArticleId) SaveArticlePreview() {
+	for {
+		select {
+		case request := <-m.Ch:
+			fmt.Println(11111111, request.Id)
+			o := orm.NewOrm()
+			o.QueryTable(new(Article)).Filter("id", request.Id).Update(orm.Params{
+				"preview": orm.ColValue(orm.ColAdd, 1),
+			})
+		}
+	}
+}
+
+type ArticleId struct {
+	Id int
+}
+
+func NewArticleId(id int) *ArticleId {
+	article := &ArticleId{Id: id}
+	return article
+}
+
+type ManageArticleId struct {
+	Ch chan *ArticleId
+}
+
+var ArticleIdM = NewArticleIdManage()
+
+func NewArticleIdManage() *ManageArticleId {
+	return &ManageArticleId{Ch: make(chan *ArticleId, 20)}
+}

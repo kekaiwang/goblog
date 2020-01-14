@@ -19,4 +19,5 @@ func Init() {
 	orm.RegisterModelWithPrefix("wkk_", new(AdminUser), new(Tag), new(Category), new(Article), new(PageInfo), new(Request), new(ArticleRelation))
 
 	go RequestM.SaveRequest()
+	go ArticleIdM.SaveArticlePreview()
 }

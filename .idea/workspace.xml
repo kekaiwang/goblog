@@ -3,11 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="b7e3612c-da3e-4e75-b3f7-1dd882a4c67b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/app.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/app.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/admin/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/article.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/default.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/default.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goblog" beforeDir="false" afterPath="$PROJECT_DIR$/goblog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/base.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/base.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/request.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/foot.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/foot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/article.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/article.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +20,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="HTML File" />
         <option value="Go File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -104,10 +106,10 @@
     </state>
     <state x="341" y="151" key="SettingsEditor/0.23.1680.978/1680.23.1920.1057@0.23.1680.978" timestamp="1577263431235" />
     <state x="2368" y="118" key="SettingsEditor/0.23.1680.978/1680.23.1920.1057@1680.23.1920.1057" timestamp="1578291884969" />
-    <state x="1920" y="23" width="1680" height="978" key="dock-window-1" timestamp="1578899945759">
+    <state x="1778" y="120" width="1680" height="978" key="dock-window-1" timestamp="1578986808867">
       <screen x="1680" y="23" width="1920" height="1057" />
     </state>
-    <state x="1920" y="23" width="1680" height="978" key="dock-window-1/0.23.1680.978/1680.23.1920.1057@0.23.1680.978" timestamp="1578899945759" />
+    <state x="1778" y="120" width="1680" height="978" key="dock-window-1/0.23.1680.978/1680.23.1920.1057@0.23.1680.978" timestamp="1578986808867" />
     <state x="2201" y="155" width="639" height="714" key="find.popup" timestamp="1578367391982">
       <screen x="1680" y="23" width="1920" height="1057" />
     </state>

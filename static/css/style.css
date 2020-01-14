@@ -1340,6 +1340,11 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     text-align: center;
 }
 
+.post-data-excerpt {
+    color: #999;
+    padding-top: 10px;
+}
+
 .post-header-thumb {
     width: 100%;
     height: 300px;

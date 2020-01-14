@@ -86,6 +86,12 @@ func (c * MainController) ArticleInfo() {
 	info := models.Article{Slug: slug}
 	c.o.Read(&info, "slug")
 
+	if info.Id <= 0 {
+
+	}
+
+	DoArticleSum(info.Id)
+
 	// get previous or next
 	previousTitle := models.Article{Slug: info.Previous}
 	if info.Previous != "" {
@@ -121,6 +127,11 @@ func (c * MainController) ArticleInfo() {
 	c.Data["Title"] = info.Title
 	c.Data["Description"] = info.Excerpt
 	c.TplName = "article.html"
+}
+
+func DoArticleSum(id int) {
+	article := models.NewArticleId(id)
+	models.ArticleIdM.Ch <- article
 }
 
 func (this *MainController) PageInfo() {
