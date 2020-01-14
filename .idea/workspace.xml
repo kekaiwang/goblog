@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7e3612c-da3e-4e75-b3f7-1dd882a4c67b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/admin/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/default.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/default.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goblog" beforeDir="false" afterPath="$PROJECT_DIR$/goblog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/goblog.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/goblog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="b7e3612c-da3e-4e75-b3f7-1dd882a4c67b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,9 +88,10 @@
       <screen x="0" y="23" width="1680" height="978" />
     </state>
     <state x="440" y="177" key="#Notifications/0.23.1680.978/1680.23.1920.1057@0.23.1680.978" timestamp="1577259811326" />
-    <state x="2229" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1578367408323">
-      <screen x="1680" y="23" width="1920" height="1057" />
+    <state x="480" y="300" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1579011541870">
+      <screen x="0" y="23" width="1680" height="978" />
     </state>
+    <state x="480" y="300" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1680.978/1680.23.1920.1057@0.23.1680.978" timestamp="1579011541870" />
     <state x="2229" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1680.978/1680.23.1920.1057@1680.23.1920.1057" timestamp="1578367408323" />
     <state x="2368" y="118" key="SettingsEditor" timestamp="1578291884969">
       <screen x="1680" y="23" width="1920" height="1057" />
