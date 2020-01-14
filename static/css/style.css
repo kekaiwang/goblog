@@ -1804,9 +1804,10 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 .footer-meta .footer-container {
     width: 100%;
     max-width: 960px;
-    height: 150px;
+    /*height: 150px;*/
     margin: 0 auto;
     padding: 0 80px;
+    text-align: center;
 }
 
 .footer-meta .meta-item {
