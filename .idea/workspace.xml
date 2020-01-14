@@ -5,7 +5,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/default.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/default.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goblog" beforeDir="false" afterPath="$PROJECT_DIR$/goblog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/article.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/article.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/category.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/head.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/page.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

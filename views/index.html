@@ -13,18 +13,30 @@
                                     {{$elem.Title}}
                                 </a>
                             </div>
+
                             <div class="item-meta">
-                                <i class="fa fa-calendar-o"></i> 发表于
-                                <time datetime="{{date $elem.DisplayTime "Y-m-d H"}}" itemprop="datePublished">
-                                    {{date $elem.DisplayTime "Y-m-d H"}}
-                                </time>
-                                <span class="post-meta-divider">|</span>
-                                <i class="fa fa-folder-o"></i>
-                                <a href="/categories/{{$elem.CategoryLink}}?type={{$elem.CategoryName}}">
-                                    {{$elem.CategoryName}}
-                                </a>
+                                <span class="item-meta-time">
+                                    <i class="fa fa-calendar-o"></i> 发表于
+                                    <time datetime="{{date $elem.DisplayTime "Y-m-d H"}}" itemprop="datePublished">
+                                        {{date $elem.DisplayTime "Y-m-d H"}}
+                                    </time>
+                                </span>
+                                <span class="item-mete-category">
+                                    <span class="post-meta-divider">|</span>
+                                    <i class="fa fa-folder-o"></i>
+                                    <a class="item-category" href="/categories/{{$elem.CategoryLink}}?type={{$elem.CategoryName}}">
+                                        {{$elem.CategoryName}}
+                                    </a>
+                                </span>
+                                <span class="item-meta-comment">
+                                    <span class="post-meta-divider">|</span>
+                                    <i class="fa fa-comment-o"></i>
+                                    comment...
+                                </span>
                             </div>
+
                             <div class="item-meta-hr bg-deepgrey"></div>
+
                             <div class="item-content">
                                 <p>{{$elem.Excerpt}}</p>
                             </div>

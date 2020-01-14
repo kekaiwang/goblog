@@ -119,6 +119,7 @@ func (c * MainController) ArticleInfo() {
 	c.Data["previousTitle"] = previousTitle.Title
 	c.Data["nextTitle"] = nextTitle.Title
 	c.Data["Title"] = info.Title
+	c.Data["Description"] = info.Excerpt
 	c.TplName = "article.html"
 }
 
