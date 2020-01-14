@@ -1,15 +1,14 @@
 {{ template "head.html" . }}
-<div class="main-content index-page clearfix onelist-page">
+<div class="main-content clearfix onelist-page">
     <div class="post-lists">
         <div class="post-lists-body">
 
             {{ range $index, $elem := .Data }}
                 <div class="post-onelist-item">
                     <div class="post-onelist-item-container">
-
                         <div class="onelist-item-info">
                             <div class="item-title">
-                                <a href="/article/{{$elem.Slug}}">
+                                <a class="post-item-title" href="/article/{{$elem.Slug}}">
                                     {{$elem.Title}}
                                 </a>
                             </div>
@@ -41,7 +40,7 @@
                                 <p>{{$elem.Excerpt}}</p>
                             </div>
 
-                            <div class="item-readmore"><a href="/article/{{$elem.Slug}}"> Continue Reading →</a></div>
+                            <div class="item-readmore"><a href="/article/{{$elem.Slug}}"> Read more  →</a></div>
                         </div>
                     </div>
                 </div>
