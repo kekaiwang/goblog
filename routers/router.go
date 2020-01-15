@@ -33,7 +33,7 @@ func init() {
 	beego.Router("/tags/:link([\\w]+).html", &controllers.MainController{}, "get:Categories")
 
 	// admin
-	beego.InsertFilter("/v1/admin/*", beego.BeforeRouter, FilterUser)
+	//beego.InsertFilter("/v1/admin/*", beego.BeforeRouter, FilterUser)
 	beego.Router("/v1/admin/login", &admin.UserController{}, "post:Login")
 	beego.Router("/v1/admin/getInfo", &admin.UserController{}, "get:GetInfo")
 	beego.Router("/v1/admin/logout", &admin.UserController{}, "post:Logout")
