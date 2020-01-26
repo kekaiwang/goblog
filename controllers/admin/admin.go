@@ -2,7 +2,6 @@ package admin
 
 import (
 	"encoding/json"
-	"github.com/wkekai/goblog/RS"
 	"github.com/wkekai/goblog/helper"
 	"github.com/wkekai/goblog/models"
 )
@@ -36,7 +35,7 @@ func (admin *UserController) Login() {
 	}
 
 	if user.Username == "" || user.Password == "" {
-		resp.Status = RS.RS_params_error
+		resp.Status = helper.RS_params_error
 		resp.Tips(helper.WARNING, "123")
 		resp.WriteJson(admin.Ctx.ResponseWriter)
 		return

@@ -1,4 +1,4 @@
-package RS
+package helper
 
 var descDict = map[int]string{
 	RS_failed        : "操作失败",

@@ -2,7 +2,6 @@ package admin
 
 import (
 	"encoding/json"
-	"github.com/wkekai/goblog/RS"
 	"github.com/wkekai/goblog/helper"
 	"github.com/wkekai/goblog/models"
 	"time"
@@ -47,8 +46,8 @@ func (page *PageController) CreatePage() {
 	pageNum, _ := page.o.QueryTable(new(models.PageInfo)).Filter("name", info.Name).Count()
 
 	if pageNum > 0 {
-		resp.Status = RS.RS_tag_exist
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_tag_exist))
+		resp.Status = helper.RS_tag_exist
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_tag_exist))
 		return
 	}
 
@@ -58,8 +57,8 @@ func (page *PageController) CreatePage() {
 	_, err := page.o.Insert(&info)
 
 	if err != nil {
-		resp.Status = RS.RS_create_failed
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_create_failed))
+		resp.Status = helper.RS_create_failed
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_create_failed))
 		return
 	}
 
@@ -88,16 +87,16 @@ func (page *PageController) UpdatePage() {
 	page.o.Read(&info)
 
 	if info.Name == "" {
-		resp.Status = RS.RS_not_found
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_not_found))
+		resp.Status = helper.RS_not_found
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_not_found))
 		return
 	}
 
 	pageInfo.Updated = time.Now()
 
 	if num, err := page.o.Update(&pageInfo); err != nil {
-		resp.Status = RS.RS_update_failed
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_update_failed))
+		resp.Status = helper.RS_update_failed
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_update_failed))
 		return
 	} else {
 		resp.Data = num

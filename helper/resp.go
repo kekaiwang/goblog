@@ -1,4 +1,4 @@
-package RS
+package helper
 
 const (
 	RS_failed        = -1 // 操作失败
@@ -24,5 +24,4 @@ const (
 	RS_user_not_login    = 301 // 用户没有登录
 
 	RS_tag_exist = 400 // tag已存在
-
 )

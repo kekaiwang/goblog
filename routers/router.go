@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
-	"github.com/wkekai/goblog/RS"
 	"github.com/wkekai/goblog/controllers"
 	"github.com/wkekai/goblog/controllers/admin"
 	"github.com/wkekai/goblog/helper"
@@ -86,7 +85,7 @@ var FilterUser = func(ctx *context.Context) {
 		err := json.Unmarshal(ctx.Input.RequestBody, &user)
 
 		if err != nil {
-			resp.Status = RS.RS_user_not_login
+			resp.Status = helper.RS_user_not_login
 			resp.Tips(helper.ERROR, "信息错误")
 			resp.WriteJson(ctx.ResponseWriter)
 			return
@@ -98,19 +97,19 @@ var FilterUser = func(ctx *context.Context) {
 
 		switch status.Status {
 		case 204:
-			resp.Status = RS.RS_user_not_login
+			resp.Status = helper.RS_user_not_login
 			resp.Tips(helper.ERROR, "管理员账号错误")
 			resp.WriteJson(ctx.ResponseWriter)
 			return
 		case 401:
-			resp.Status = RS.RS_user_not_login
+			resp.Status = helper.RS_user_not_login
 			resp.Tips(helper.WARNING, "管理员账号/密码错误")
 			resp.WriteJson(ctx.ResponseWriter)
 			return
 		}
 	} else {
 		if token != beego.AppConfig.String("Token") {
-			resp.Status = RS.RS_user_not_login
+			resp.Status = helper.RS_user_not_login
 			resp.Tips(helper.WARNING, "管理员账号/密码错误")
 			resp.WriteJson(ctx.ResponseWriter)
 			return

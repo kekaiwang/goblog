@@ -8,7 +8,6 @@ import (
 	"github.com/astaxie/beego/orm"
 	"github.com/qiniu/api.v7/auth/qbox"
 	"github.com/qiniu/api.v7/storage"
-	"github.com/wkekai/goblog/RS"
 	"github.com/wkekai/goblog/helper"
 	"github.com/wkekai/goblog/models"
 	"os"
@@ -58,7 +57,7 @@ func (article *ArticleController) CreateTag() {
 	classifyNum, _ := query.Filter("name", tag.Name).Count()
 
 	if classifyNum > 0 {
-		resp.Status = RS.RS_tag_exist
+		resp.Status = helper.RS_tag_exist
 		resp.Tips(helper.WARNING, "名称已存在")
 		return
 	}
@@ -67,8 +66,8 @@ func (article *ArticleController) CreateTag() {
 	_, err := article.o.Insert(&tag)
 
 	if err != nil {
-		resp.Status = RS.RS_create_failed
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_tag_exist))
+		resp.Status = helper.RS_create_failed
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_tag_exist))
 		return
 	}
 
@@ -88,8 +87,8 @@ func (article *ArticleController) UpdateTag() {
 	article.o.Read(&info, "id")
 
 	if info.Name == "" {
-		resp.Status = RS.RS_not_found
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_not_found))
+		resp.Status = helper.RS_not_found
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_not_found))
 		return
 	}
 
@@ -99,8 +98,8 @@ func (article *ArticleController) UpdateTag() {
 	info.Updated = time.Now()
 
 	if num, err := article.o.Update(&info); err != nil {
-		resp.Status = RS.RS_update_failed
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_update_failed))
+		resp.Status = helper.RS_update_failed
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_update_failed))
 		return
 	} else {
 		resp.Data = num
@@ -143,8 +142,8 @@ func (article *ArticleController) CreateCategory() {
 	categoryNum, _ := query.Filter("name", category.Name).Count()
 
 	if categoryNum > 0 {
-		resp.Status = RS.RS_tag_exist
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_tag_exist))
+		resp.Status = helper.RS_tag_exist
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_tag_exist))
 		return
 	}
 
@@ -153,8 +152,8 @@ func (article *ArticleController) CreateCategory() {
 	_, err := article.o.Insert(&category)
 
 	if err != nil {
-		resp.Status = RS.RS_create_failed
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_create_failed))
+		resp.Status = helper.RS_create_failed
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_create_failed))
 		return
 	}
 
@@ -174,8 +173,8 @@ func (article *ArticleController) UpdateCategory() {
 	article.o.Read(&info, "id")
 
 	if info.Name == "" {
-		resp.Status = RS.RS_not_found
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_not_found))
+		resp.Status = helper.RS_not_found
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_not_found))
 		return
 	}
 
@@ -185,8 +184,8 @@ func (article *ArticleController) UpdateCategory() {
 	info.Updated = time.Now()
 
 	if num, err := article.o.Update(&info); err != nil {
-		resp.Status = RS.RS_update_failed
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_update_failed))
+		resp.Status = helper.RS_update_failed
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_update_failed))
 		return
 	} else {
 		resp.Data = num
@@ -304,8 +303,8 @@ func (article *ArticleController) CreateArticle() {
 	slugNum, _ := query.Filter("slug", articleInfo.Slug).Count()
 
 	if slugNum > 0 {
-		resp.Status = RS.RS_tag_exist
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_tag_exist))
+		resp.Status = helper.RS_tag_exist
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_tag_exist))
 		return
 	}
 
@@ -320,8 +319,8 @@ func (article *ArticleController) CreateArticle() {
 	id, err := article.o.Insert(&articleInfo)
 
 	if err != nil {
-		resp.Status = RS.RS_create_failed
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_create_failed))
+		resp.Status = helper.RS_create_failed
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_create_failed))
 		return
 	}
 
@@ -362,8 +361,8 @@ func (article *ArticleController) UploadImage() {
 	file, information, err := article.GetFile("image")
 
 	if err != nil {
-		resp.Status = RS.RS_params_error
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_params_error))
+		resp.Status = helper.RS_params_error
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_params_error))
 		return
 	}
 	defer file.Close()
@@ -414,8 +413,8 @@ func (article *ArticleController) UpdateArticle() {
 	article.o.Read(&info, "id")
 
 	if info.Title == "" {
-		resp.Status = RS.RS_not_found
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_not_found))
+		resp.Status = helper.RS_not_found
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_not_found))
 		return
 	}
 
@@ -443,8 +442,8 @@ func (article *ArticleController) UpdateArticle() {
 
 	num, err := article.o.Update(&info)
 	if err != nil {
-		resp.Status = RS.RS_update_failed
-		resp.Tips(helper.WARNING, RS.Desc(RS.RS_update_failed))
+		resp.Status = helper.RS_update_failed
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_update_failed))
 		return
 	}
 
