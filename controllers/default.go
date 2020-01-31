@@ -76,7 +76,7 @@ func (c *MainController) Get() {
 	c.Data["Total"] = articleList.Total
 	c.Data["CurrentPage"] = page
 	c.Data["TotalPage"] = helper.NewTotalPage(articleList.Total, pagesize)
-	c.Data["Title"] = "blog"
+	c.Data["Title"] = "wangkekai's blog"
 	c.Data["Email"] = "wkekai@163.com"
 	c.TplName = "index.html"
 }
