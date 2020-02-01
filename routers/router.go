@@ -2,14 +2,15 @@ package routers
 
 import (
 	"encoding/json"
+	"html/template"
+	"net/http"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
 	"github.com/wkekai/goblog/controllers"
 	"github.com/wkekai/goblog/controllers/admin"
 	"github.com/wkekai/goblog/helper"
 	"github.com/wkekai/goblog/models"
-	"html/template"
-	"net/http"
 )
 
 const (
@@ -24,7 +25,7 @@ func init() {
 	beego.BConfig.WebConfig.Session.SessionGCMaxLifetime = 3600
 
 	//blog
-    beego.Router("/", &controllers.MainController{})
+	beego.Router("/", &controllers.MainController{})
 	beego.Router("/page/:slug([\\w]+).html", &controllers.MainController{}, "get:PageInfo")
 	beego.Router("/article/:slug([\\w\\-]+).html", &controllers.MainController{}, "get:ArticleInfo")
 	beego.Router("/archives.html", &controllers.MainController{}, "get:Archives")

@@ -4,17 +4,18 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
+	"path"
+	"strconv"
+	"strings"
+	"time"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/qiniu/api.v7/auth/qbox"
 	"github.com/qiniu/api.v7/storage"
 	"github.com/wkekai/goblog/helper"
 	"github.com/wkekai/goblog/models"
-	"os"
-	"path"
-	"strconv"
-	"strings"
-	"time"
 )
 
 type ArticleController struct {
@@ -23,7 +24,7 @@ type ArticleController struct {
 
 // -------------- tag --------------------
 type TagInfo struct {
-	Data []*models.Tag
+	Data  []*models.Tag
 	Total int64
 }
 
@@ -108,7 +109,7 @@ func (article *ArticleController) UpdateTag() {
 
 // -------------- category --------------------
 type CategoryList struct {
-	Data []*models.Category
+	Data  []*models.Category
 	Total int64
 }
 
@@ -194,30 +195,30 @@ func (article *ArticleController) UpdateCategory() {
 
 // -------------- article --------------------
 type ArticleList struct {
-	Data interface{}
+	Data  interface{}
 	Total int64
 }
 
 type ArticleInfo struct {
-	Id int
-	Author string
-	Title string
-	Count int
-	Markdown string
-	Content string
-	CategoryId int
-	TagIds string
-	Excerpt string
-	Previous int
-	Next int
-	Preview int
-	Slug string
-	IsDraft int
-	Created time.Time
-	EditTime time.Time
-	Updated time.Time
-	DisplayTime time.Time
-	CategoryName  string
+	Id           int
+	Author       string
+	Title        string
+	Count        int
+	Markdown     string
+	Content      string
+	CategoryId   int
+	TagIds       string
+	Excerpt      string
+	Previous     int
+	Next         int
+	Preview      int
+	Slug         string
+	IsDraft      int
+	Created      time.Time
+	EditTime     time.Time
+	Updated      time.Time
+	DisplayTime  time.Time
+	CategoryName string
 }
 
 func (article *ArticleController) ArticleList() {
@@ -391,7 +392,7 @@ func (article *ArticleController) UploadImage() {
 			"x:name": "github logo",
 		},
 	}
-	err = formUploader.PutFile(context.Background(), &ret, upToken, key, "static/temp_image/" + localFile, &putExtra)
+	err = formUploader.PutFile(context.Background(), &ret, upToken, key, "static/temp_image/"+localFile, &putExtra)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -428,6 +429,7 @@ func (article *ArticleController) UpdateArticle() {
 		})
 	}
 
+	info.Author = articleInfo.Author
 	info.Title = articleInfo.Title
 	info.CategoryId = articleInfo.CategoryId
 	info.Excerpt = articleInfo.Excerpt
