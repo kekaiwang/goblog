@@ -1,6 +1,6 @@
 {{ template "head.html" . }}
 <div class="main-content clearfix onelist-page">
-    <article class="main-content page-page" itemscope itemtype="http://schema.org/Article">
+    <article class="main-content page-page" itemscope>
         <div class="post-header">
             <h1 class="post-title" itemprop="name headline">
                 {{.info.Title}}
@@ -44,7 +44,7 @@
                     </li>
                     <li class="post-copyright-link">
                         <strong>本文链接：</strong>
-                        <a href="https://wangkekai.cn/article/{{.info.Slug}}" title="{{.info.Title}}">https://www.wangkekai.com/article/{{.info.Slug}}</a>
+                        <a href="https://wangkekai.cn/article/{{.info.Slug}}" title="{{.info.Title}}">https://wangkekai.cn/article/{{.info.Slug}}</a>
                     </li>
                     <li class="post-copyright-license">
                         <strong>版权声明： </strong>
