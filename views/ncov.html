@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>nCov 肺炎疫情 - wangkekai's blog</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    <meta name="description" content="My name is Wangkekai, I use @Three_water on web. I'm a phper+.肺炎疫情">
+    <meta name="keywords" content="wangkekai, wkekai, blog, nCov, 肺炎疫情, Wangkekai`s Blog, PHP, Golang, Beego, Mysql, Redis, Vue">
+    <meta name="description" content="{{.Description}}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Wangkekai`s Blog">
+    <meta property="og:url" content="https://wangkekai.cn">
+    <meta property="og:url" content="https://wangkekai.com">
+    <meta property="og:site_name" content="Wangkekai`s Blog">
+    <meta property="og:description" content="My name is Wangkekai, I use @Three_water on web. I'm a phper+.">
+    <meta property="og:locale" content="zh-CN">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Wangkekai`s Blog">
+    <meta name="twitter:description" content="My name is Wangkekai, I use @Three_water on web. I'm a phper+.">
+    <link rel="canonical" href="https://wangkekai.cn/">
+    <link rel="canonical" href="https://wangkekai.com/">
+    <title>Wangkekai`s Blog</title>
+
+    <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts-en.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', '等线', sans-serif;
+            color: #eee;
+            display: flex;
+            flex-direction: row;
+            background-color: #222;;
+            transition: background-position .2s, background-color .2s;
+        }
+        #china-ncov {
+            width: 1000px;
+            height: 700px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            position: absolute;
+            align-self: center;
+        }
+        .container {
+            flex: 1;
+            margin: 0 auto;
+            position: relative;
+            height: 100vh;
+            max-width: 1500px;
+            padding: 0 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .title {
+            line-height: 0.9;
+            font-size: 60px;
+            margin-bottom: 0;
+        }
+
+        .title-s {
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .title-s a,
+        .focus a {
+            color: inherit;
+            transition: all .12s;
+            cursor: pointer;
+            text-decoration: none;
+            pointer-events: all;
+        }
+
+        .sidebar {
+            display: flex;
+            height: 80vh;
+        }
+
+        .sidebar.left {
+            align-items: flex-start;
+            justify-content: space-evenly;
+        }
+
+        .sidebar.middle {
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .focus {
+            text-align: right;
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+        }
+        .rate {
+            font-size: 50px;
+        }
+        .desc {
+            width: 130px;
+        }
+        .sidebar.right {
+            align-items: flex-end;
+            justify-content: space-between;
+            text-align: right;
+        }
+        .time-end {
+            color: rgba(255,255,255,0.4);
+        }
+    </style>
+</head>
+<body>
+    <div id="china-ncov"></div>
+    <div class="container">
+        <div class="sidebar left to-invert">
+            <div class="methods">
+            </div>
+            <div class="focus">
+                <a href="https://wangkekai.cn">
+                    <img style="width: 100px;border-radius: 50px;opacity: 0.6;" src="https://mail.wangkekai.cn/0476165aed0b0c7ae77e6ec2317c93e9" />
+                </a>
+                <span class="city-name china">全国确诊</span>
+                <strong class="rate"></strong>
+                <small class="city-name">治愈人数</small>
+                <strong class="desc cure"></strong>
+                <small class="city-name">死亡人数</small>
+                <strong class="desc death"></strong>
+                <small class="desc time-end"></small>
+            </div>
+        </div>
+        <div class="sidebar right to-invert">
+            <div class="title-group">
+                <p class="title-s">
+                    <strong>Data Sources:</strong><br />
+                    <a href="https://news.sina.cn/zt_d/yiqing0121" target="_blank">Sina</a>
+                </p>
+                <div class="title-s">
+                    免责声明：数据来源三方，仅供参考，请以官方公布为准！
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var myChart = echarts.init(document.getElementById('china-ncov'))
+        var uploadedDataURL = 'https://mail.wangkekai.cn/data-1519188124693-rkro_O5vz.json?v=98709'
+        myChart.showLoading()
+        var total = 0,
+            cure = 0,
+            death = 0,
+            time = ''
+
+
+        var sinadata = []
+        $.ajax({
+            type : "get",
+            async: false,
+            url : "https://interface.sina.cn/news/wap/fymap2020_data.d.json",
+            dataType: "jsonp",
+            success : function(data) {
+                console.log(data)
+                var list = data.data.list
+                list.forEach(function(v) {
+                    if (v.name == '北京' || v.name == '天津' || v.name == '重庆' || v.name == '上海') {
+                        v.name = v.name + '市'
+                        sinadata.push(v)
+                    } else if (v.name == '台湾' || v.name == '香港' || v.name == '澳门') {
+                        sinadata.push(v)
+                    } else {
+                        v.city.forEach(function(value) {
+                            value.name = value.mapName
+                            value.value = parseInt(value.conNum)
+                            sinadata.push(value)
+                        })
+                    }
+                })
+
+                total = data.data.gntotal
+                cure = data.data.curetotal
+                death = data.data.deathtotal
+                time = data.data.times
+
+                $('.rate').html(total)
+                $('.cure').html(cure)
+                $('.death').html(death)
+                $('.time-end').html(time)
+                
+                $.get(uploadedDataURL, function(geoJson) {
+                    myChart.hideLoading()
+
+                    echarts.registerMap('chinacity', geoJson)
+                    var mapFeatures = echarts.getMap('chinacity').geoJson.features
+
+                    myChart.setOption(option = {
+                        title: {
+                            text: '2020全国新型冠状病毒分布情况',
+                            left: 'center',
+                            textStyle: {
+                                color: '#fff'
+                            },
+                            top: 'top'
+                        },
+                        visualMap: {
+                            show: false,
+                            type:'piecewise',
+                            pieces:[
+                                {min: 5000,max:10000},
+                                {min: 4000, max: 5000},
+                                {min: 3000, max: 4000},
+                                {min: 2000, max: 3000},
+                                {min: 1000, max: 2000},
+                                {min: 500, max: 1000},
+                                {min: 400, max: 500,},
+                                {min: 300, max: 400,},
+                                {min: 200, max: 300,},
+                                {min: 100, max: 200,},
+                                {min: 20, max: 100},
+                                {min: 1, max: 20}
+                            ],
+                            showLabel:true,
+                            text: ['确诊病例'],
+                            calculable: true,
+                            inRange: {
+                                color:['#F08080', '#800000']
+
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: function(params) {
+                                if (params.data != undefined) {
+                                    return params.name + '<br>确诊人数：' + params.data.value + '<br>治愈人数：' + params.data.cureNum + 
+                                        '<br>死亡人数：' + params.data.deathNum
+                                } else {
+                                    return params.name + '<br>确诊人数：0'
+                                }
+                            }
+                        },
+                        toolbox: {
+                            show: false
+                        },
+                        series: [
+                            {
+                                name: '确诊人数',
+                                type: 'map',
+                                mapType: 'chinacity',
+                                top: 50,
+                                label: {
+                                    normal: {
+                                        show: false
+                                    }
+                                },
+                                roam:false,
+                                data: sinadata
+                            }
+                        ]
+                    })
+                })
+                myChart.on('click', function (params) {
+                    if (params.data == undefined) {
+                        $('body').css('background-color', '#222')
+                    } else {
+                        $('body').css('background-color', params.color)
+                    }
+                })
+
+                myChart.on('mouseover', function (params) {
+                    $('.china').html(params.name)
+                    if (params.data != undefined) {
+                        $('.rate').html(params.data.value)
+                        $('.cure').html(params.data.cureNum)
+                        $('.death').html(params.data.deathNum)
+                    } else {
+                        $('.rate').html(0)
+                        $('.cure').html(0)
+                        $('.death').html(0)
+                    }
+                    
+                })
+                myChart.on('mouseout', function (params) {
+                    $('.china').html('全国确诊')
+                    $('.rate').html(total)
+                    $('.cure').html(cure)
+                    $('.death').html(death)
+                })
+            }
+        })
+    </script>
+</body>
+</html>

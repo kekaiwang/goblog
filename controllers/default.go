@@ -1,11 +1,12 @@
 package controllers
 
 import (
+	"strings"
+	"time"
+
 	"github.com/astaxie/beego/orm"
 	"github.com/wkekai/goblog/helper"
 	"github.com/wkekai/goblog/models"
-	"strings"
-	"time"
 )
 
 type MainController struct {
@@ -13,41 +14,41 @@ type MainController struct {
 }
 
 type ArticleInfo struct {
-	Id int
-	Author string
-	Title string
-	Count int
-	Markdown string
-	Content string
-	CategoryId int
-	TagIds string
-	Excerpt string
-	Previous int
-	Next int
-	Preview int
-	Slug string
-	Thumb string
-	IsDraft int
-	Created time.Time
-	EditTime time.Time
-	Updated time.Time
-	DisplayTime time.Time
-	CategoryName  string
+	Id           int
+	Author       string
+	Title        string
+	Count        int
+	Markdown     string
+	Content      string
+	CategoryId   int
+	TagIds       string
+	Excerpt      string
+	Previous     int
+	Next         int
+	Preview      int
+	Slug         string
+	Thumb        string
+	IsDraft      int
+	Created      time.Time
+	EditTime     time.Time
+	Updated      time.Time
+	DisplayTime  time.Time
+	CategoryName string
 	CategoryLink string
 }
 
 type ArticleList struct {
-	Data interface{}
+	Data  interface{}
 	Total int64
 }
 
 func (c *MainController) Get() {
 	var (
-		articleList ArticleList
+		articleList  ArticleList
 		articleInfos []ArticleInfo
-		pagesize int = 5
-		page int
-		offset int
+		pagesize     int = 5
+		page         int
+		offset       int
 	)
 
 	if page, _ = c.GetInt("page"); page < 1 {
@@ -81,7 +82,7 @@ func (c *MainController) Get() {
 	c.TplName = "index.html"
 }
 
-func (c * MainController) ArticleInfo() {
+func (c *MainController) ArticleInfo() {
 	slug := c.Ctx.Input.Param(":slug") + ".html"
 
 	info := models.Article{Slug: slug}
@@ -152,10 +153,10 @@ func (this *MainController) Archives() {
 }
 
 type CategoryInfo struct {
-	Id int
-	Name string
-	Title string
-	Slug string
+	Id          int
+	Name        string
+	Title       string
+	Slug        string
 	DisplayTime time.Time
 }
 
@@ -166,14 +167,14 @@ type Meta struct {
 
 func (this *MainController) Categories() {
 	var (
-		meta Meta
-		data []CategoryInfo
-		total int64
+		meta     Meta
+		data     []CategoryInfo
+		total    int64
 		pagesize int = 6
-		page int
-		offset int
-		uris []string
-		link string
+		page     int
+		offset   int
+		uris     []string
+		link     string
 	)
 
 	uris = strings.Split(this.Ctx.Input.URL(), "/")
@@ -208,7 +209,7 @@ func (this *MainController) Categories() {
 
 		this.o.Raw(sql, link).QueryRows(&data)
 
-		this.o.Raw("select count(*) as total from wkk_category a left join wkk_article b on a.id = b.category_id " +
+		this.o.Raw("select count(*) as total from wkk_category a left join wkk_article b on a.id = b.category_id "+
 			"where a.router_link = ? and b.is_draft < 3", link).QueryRow(&total)
 	} else if uris[1] == "tags" {
 		meta.Name = "标签"
@@ -231,7 +232,7 @@ func (this *MainController) Categories() {
 
 		this.o.Raw(sql, link).QueryRows(&data)
 
-		this.o.Raw("select count(*) as total from wkk_tag a left join wkk_article_relation b on a.id = b.tag_id " +
+		this.o.Raw("select count(*) as total from wkk_tag a left join wkk_article_relation b on a.id = b.tag_id "+
 			"left join wkk_article c on b.article_id = c.id where a.router_link = ? and c.is_draft < 3", link).QueryRow(&total)
 	}
 
@@ -242,4 +243,9 @@ func (this *MainController) Categories() {
 	this.Data["meta"] = meta
 	this.Data["Title"] = "分类"
 	this.TplName = "category.html"
+}
+
+func (this *MainController) Ncov() {
+	this.Data["Title"] = "分类"
+	this.TplName = "ncov.html"
 }

@@ -24,16 +24,17 @@ func init() {
 	beego.BConfig.WebConfig.Session.SessionCookieLifeTime = ONE_DAY
 	beego.BConfig.WebConfig.Session.SessionGCMaxLifetime = 3600
 
-	//blog
+	// blog
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("/page/:slug([\\w]+).html", &controllers.MainController{}, "get:PageInfo")
 	beego.Router("/article/:slug([\\w\\-]+).html", &controllers.MainController{}, "get:ArticleInfo")
 	beego.Router("/archives.html", &controllers.MainController{}, "get:Archives")
 	beego.Router("/categories/:link([\\w]+).html", &controllers.MainController{}, "get:Categories")
 	beego.Router("/tags/:link([\\w]+).html", &controllers.MainController{}, "get:Categories")
+	beego.Router("/ncov.html", &controllers.MainController{}, "get:Ncov")
 
 	// admin
-	//beego.InsertFilter("/v1/admin/*", beego.BeforeRouter, FilterUser)
+	beego.InsertFilter("/v1/admin/*", beego.BeforeRouter, FilterUser)
 	beego.Router("/v1/admin/login", &admin.UserController{}, "post:Login")
 	beego.Router("/v1/admin/getInfo", &admin.UserController{}, "get:GetInfo")
 	beego.Router("/v1/admin/logout", &admin.UserController{}, "post:Logout")

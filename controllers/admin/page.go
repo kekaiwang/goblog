@@ -2,9 +2,10 @@ package admin
 
 import (
 	"encoding/json"
+	"time"
+
 	"github.com/wkekai/goblog/helper"
 	"github.com/wkekai/goblog/models"
-	"time"
 )
 
 type PageController struct {
@@ -12,7 +13,7 @@ type PageController struct {
 }
 
 type PageInfo struct {
-	Data []*models.PageInfo
+	Data  []*models.PageInfo
 	Total int64
 }
 
