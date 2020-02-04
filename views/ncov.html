@@ -54,7 +54,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            pointer-events: none;
         }
 
         .title {
@@ -75,7 +74,6 @@
             transition: all .12s;
             cursor: pointer;
             text-decoration: none;
-            pointer-events: all;
         }
 
         .sidebar {
@@ -112,6 +110,13 @@
         .time-end {
             color: rgba(255,255,255,0.4);
         }
+        @media screen and (max-width: 701px) {
+            .focus span,
+            .focus strong,
+            .focus small {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -131,6 +136,7 @@
                 <small class="city-name">死亡人数</small>
                 <strong class="desc death"></strong>
                 <small class="desc time-end"></small>
+                
             </div>
         </div>
         <div class="sidebar right to-invert">
