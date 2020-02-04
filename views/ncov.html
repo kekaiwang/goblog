@@ -127,7 +127,7 @@
             </div>
             <div class="focus">
                 <a href="https://wangkekai.cn">
-                    <img style="width: 100px;border-radius: 50px;opacity: 0.6;" src="https://mail.wangkekai.cn/0476165aed0b0c7ae77e6ec2317c93e9" />
+                    <img class="logo" style="width: 100px;border-radius: 50px;opacity: 0.6;" src="https://mail.wangkekai.cn/0476165aed0b0c7ae77e6ec2317c93e9" />
                 </a>
                 <span class="city-name china">全国确诊</span>
                 <strong class="rate"></strong>
@@ -152,6 +152,10 @@
         </div>
     </div>
     <script>
+        if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
+            $('#china-ncov').css('width', document.body.clientWidth)
+            $('.logo').css('width', '30px')
+        }
         var myChart = echarts.init(document.getElementById('china-ncov'))
         var uploadedDataURL = 'https://mail.wangkekai.cn/data-1519188124693-rkro_O5vz.json?v=98709'
         myChart.showLoading()
@@ -159,7 +163,6 @@
             cure = 0,
             death = 0,
             time = ''
-
 
         var sinadata = []
         $.ajax({
