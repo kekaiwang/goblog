@@ -1,3 +1,7 @@
+// @APIVersion 1.0.0
+// @Title blog API
+// @Description wangkekai's blog api
+// Contact wkekai@163.com
 package routers
 
 import (

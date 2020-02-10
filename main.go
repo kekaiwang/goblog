@@ -21,13 +21,12 @@ func main() {
 	beego.Run()
 }
 
-func sub(in int)(out int){
+func sub(in int) (out int) {
 	out = in - 1
 	return
 }
 
-func add(in int)(out int){
+func add(in int) (out int) {
 	out = in + 1
 	return
 }
-
