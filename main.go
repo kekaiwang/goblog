@@ -18,6 +18,12 @@ func main() {
 	beego.AddFuncMap("sub", sub)
 	beego.AddFuncMap("add", add)
 
+	// if runmode is dev use this
+	// if beego.BConfig.RunMode == "dev" {
+	// 	beego.BConfig.WebConfig.DirectoryIndex = true
+	// 	beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
+	// }
+
 	beego.Run()
 }
 

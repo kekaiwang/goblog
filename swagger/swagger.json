@@ -1,0 +1,10 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "blog API",
+        "description": "wangkekai's blog api",
+        "version": "1.0.0",
+        "contact": {}
+    },
+    "paths": null
+}
