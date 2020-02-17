@@ -65,7 +65,7 @@ func (c *MainController) Get() {
 		From("wkk_article as article").
 		LeftJoin("wkk_category as category").On("article.category_id = category.id").
 		Where("article.is_draft < 3").
-		OrderBy("article.id").Desc().
+		OrderBy("article.display_time").Desc().
 		Limit(pagesize).Offset(offset).String()
 
 	c.o.Raw(sql).QueryRows(&articleInfos)
