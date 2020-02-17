@@ -45,7 +45,7 @@ mydomain = wangkekai.com
 httpport = 8888
 ```
 
-2.copy运行根目录下的goblog.sql文件既是简单的数据和表结构
+2.copy运行根目录下的goblog.sql文件并配置对应的数据库信息，程序就跑起来了
 
 3.管理端目前单独在一个项目后期会整合进来，当前sql文件已更新。
 
