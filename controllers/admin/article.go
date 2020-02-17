@@ -426,7 +426,7 @@ func (article *ArticleController) UpdateArticle() {
 
 	slugNum, _ := query.SetCond(cond1).
 		Count()
-	fmt.Printf("now slub num is :%d", slugNum)
+
 	if slugNum > 0 {
 		resp.Status = helper.RS_tag_exist
 		resp.Tips(helper.WARNING, helper.Desc(helper.RS_tag_exist))
@@ -440,6 +440,19 @@ func (article *ArticleController) UpdateArticle() {
 		})
 		article.o.QueryTable(new(models.Category)).Filter("id", info.CategoryId).Update(orm.Params{
 			"link_article": orm.ColValue(orm.ColMinus, 1),
+		})
+	}
+
+	// change tag use_times
+	if articleInfo.TagIds != info.TagIds {
+		tags := info.TagIds
+		article.o.QueryTable(new(models.Tag)).Filter("id__in", tags).Update(orm.Params{
+			"use_times": orm.ColValue(orm.ColMinus, 1),
+		})
+
+		tags = articleInfo.TagIds
+		article.o.QueryTable(new(models.Tag)).Filter("id__in", tags).Update(orm.Params{
+			"use_times": orm.ColValue(orm.ColAdd, 1),
 		})
 	}
 
