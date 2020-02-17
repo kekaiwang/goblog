@@ -419,6 +419,20 @@ func (article *ArticleController) UpdateArticle() {
 		return
 	}
 
+	// check article slug
+	query := article.o.QueryTable(new(models.Article))
+	cond := orm.NewCondition()
+	cond1 := cond.And("slug", articleInfo.Slug).And("id__lt", articleInfo.Id).Or("id__gt", articleInfo.Id)
+
+	slugNum, _ := query.SetCond(cond1).
+		Count()
+	fmt.Printf("now slub num is :%d", slugNum)
+	if slugNum > 0 {
+		resp.Status = helper.RS_tag_exist
+		resp.Tips(helper.WARNING, helper.Desc(helper.RS_tag_exist))
+		return
+	}
+
 	// change is category same
 	if info.CategoryId != articleInfo.CategoryId {
 		article.o.QueryTable(new(models.Category)).Filter("id", articleInfo.CategoryId).Update(orm.Params{
