@@ -18,6 +18,7 @@ func (base *BaseController) Prepare() {
 	base.DoRequest()
 }
 
+// sum request channel
 func (base *BaseController) DoRequest() {
 	request := models.NewRequest(base.Ctx.Input)
 	models.RequestM.Ch <- request
