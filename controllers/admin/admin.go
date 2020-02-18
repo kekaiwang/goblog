@@ -2,6 +2,7 @@ package admin
 
 import (
 	"encoding/json"
+
 	"github.com/wkekai/goblog/helper"
 	"github.com/wkekai/goblog/models"
 )
@@ -16,9 +17,9 @@ type UserParams struct {
 }
 
 type Info struct {
-	Roles string
-	Name string
-	Avatar string
+	Roles        string
+	Name         string
+	Avatar       string
 	Introduction string
 }
 

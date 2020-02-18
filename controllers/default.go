@@ -37,11 +37,13 @@ type ArticleInfo struct {
 	CategoryLink string
 }
 
+// artilce data struct
 type ArticleList struct {
 	Data  interface{}
 	Total int64
 }
 
+// blog index data list
 func (c *MainController) Get() {
 	var (
 		articleList  ArticleList
@@ -82,6 +84,7 @@ func (c *MainController) Get() {
 	c.TplName = "index.html"
 }
 
+// get article page data
 func (c *MainController) ArticleInfo() {
 	slug := c.Ctx.Input.Param(":slug") + ".html"
 
@@ -103,10 +106,6 @@ func (c *MainController) ArticleInfo() {
 	nextTitle := models.Article{Slug: info.Next}
 	if info.Next != "" {
 		c.o.QueryTable(new(models.Article)).Filter("slug", nextTitle.Slug).One(&nextTitle, "title")
-	}
-
-	if info.Next != "" {
-		c.o.QueryTable(new(models.Article)).Filter("slug", previousTitle.Slug).One(&previousTitle, "title")
 	}
 
 	// get tag list
@@ -131,11 +130,13 @@ func (c *MainController) ArticleInfo() {
 	c.TplName = "article.html"
 }
 
+// sum article read times
 func DoArticleSum(id int) {
 	article := models.NewArticleId(id)
 	models.ArticleIdM.Ch <- article
 }
 
+// self page function
 func (this *MainController) PageInfo() {
 	slug := this.Ctx.Input.Param(":slug")
 
@@ -148,10 +149,12 @@ func (this *MainController) PageInfo() {
 	this.TplName = "page.html"
 }
 
+// TODO:: archives functioni
 func (this *MainController) Archives() {
 
 }
 
+// category data struct
 type CategoryInfo struct {
 	Id          int
 	Name        string
@@ -165,6 +168,7 @@ type Meta struct {
 	Name string
 }
 
+// get category or tags data
 func (this *MainController) Categories() {
 	var (
 		meta     Meta
@@ -245,6 +249,7 @@ func (this *MainController) Categories() {
 	this.TplName = "category.html"
 }
 
+// ncov router
 func (this *MainController) Ncov() {
 	this.Data["Title"] = "分类"
 	this.TplName = "ncov.html"
