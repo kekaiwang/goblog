@@ -66,7 +66,7 @@ func (c *MainController) Get() {
 		"category.router_link as category_link").
 		From("wkk_article as article").
 		LeftJoin("wkk_category as category").On("article.category_id = category.id").
-		Where("article.is_draft < 3").
+		Where("article.is_draft = 2").
 		OrderBy("article.display_time").Desc().
 		Limit(pagesize).Offset(offset).String()
 
