@@ -9,17 +9,17 @@ import (
 )
 
 type AdminUser struct {
-	Id         int       `orm:"auto"`
-	Name       string    `orm:"size(255)"`
-	Password   string    `json:"password"`
-	Email      string    `json:"email"`
-	LoginCount int       `json:"login_count"`
-	Salt       string    `json:"salt"`
-	Status     int8      `json:"status"`
-	LastLogin  time.Time `json:"last_login"`
-	LastIp     string    `json:"last_ip"`
-	Created    time.Time `json:"created"`
-	Updated    time.Time `json:"updated"`
+	Id         int    `orm:"auto"`
+	Name       string `orm:"size(255)"`
+	Password   string
+	Email      string
+	LoginCount int
+	Salt       string
+	Status     int8
+	LastLogin  time.Time
+	LastIp     string
+	Created    time.Time
+	Updated    time.Time
 }
 
 type LoginRes struct {
