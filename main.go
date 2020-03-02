@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/wkekai/goblog/models"
@@ -18,9 +19,8 @@ func main() {
 	beego.AddFuncMap("sub", sub)
 	beego.AddFuncMap("add", add)
 
-	// logs.Async()
-	// logs.SetLogger(logs.AdapterMultiFile, `{"filename": "logs/test.log"}`)
-	// logs.SetLogger(logs.AdapterConn, `{"net":"tcp","addr":":7020"}`)
+	logs.Async()
+	logs.SetLogger(logs.AdapterMultiFile, `{"filename": "logs/test.log", "daily": true}`)
 
 	// if runmode is dev use this
 	// if beego.BConfig.RunMode == "dev" {
