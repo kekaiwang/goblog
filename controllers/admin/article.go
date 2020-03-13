@@ -28,6 +28,7 @@ type TagInfo struct {
 	Total int64
 }
 
+// get tag list
 func (article *ArticleController) TagList() {
 	resp := helper.NewResponse()
 	var info TagInfo
@@ -46,6 +47,7 @@ func (article *ArticleController) TagList() {
 	resp.WriteJson(article.Ctx.ResponseWriter)
 }
 
+// create tag
 func (article *ArticleController) CreateTag() {
 	var tag models.Tag
 	resp := helper.NewResponse()
@@ -75,6 +77,7 @@ func (article *ArticleController) CreateTag() {
 	resp.Data = tag
 }
 
+// update tag info
 func (article *ArticleController) UpdateTag() {
 	resp := helper.NewResponse()
 	var tag models.Tag
@@ -113,6 +116,7 @@ type CategoryList struct {
 	Total int64
 }
 
+// get category list info
 func (article *ArticleController) CategoryList() {
 	resp := helper.NewResponse()
 
@@ -131,6 +135,7 @@ func (article *ArticleController) CategoryList() {
 	resp.WriteJson(article.Ctx.ResponseWriter)
 }
 
+// create new category
 func (article *ArticleController) CreateCategory() {
 	resp := helper.NewResponse()
 	var category models.Category
@@ -161,6 +166,7 @@ func (article *ArticleController) CreateCategory() {
 	resp.Data = category
 }
 
+// update category info
 func (article *ArticleController) UpdateCategory() {
 	resp := helper.NewResponse()
 
@@ -221,6 +227,7 @@ type ArticleInfo struct {
 	CategoryName string
 }
 
+// get article list info
 func (article *ArticleController) ArticleList() {
 	resp := helper.NewResponse()
 	var articleList ArticleList
@@ -254,6 +261,7 @@ func (article *ArticleController) ArticleList() {
 	resp.WriteJson(article.Ctx.ResponseWriter)
 }
 
+// get category list
 func (article *ArticleController) GetCategories() {
 	resp := helper.NewResponse()
 
@@ -267,6 +275,7 @@ func (article *ArticleController) GetCategories() {
 	resp.Data = category
 }
 
+// get create article tag info
 func (article *ArticleController) GetTags() {
 	resp := helper.NewResponse()
 
@@ -292,6 +301,7 @@ func (article *ArticleController) Detail() {
 	resp.Data = articleInfo
 }
 
+// create new article
 func (article *ArticleController) CreateArticle() {
 	resp := helper.NewResponse()
 	defer resp.WriteJson(article.Ctx.ResponseWriter)
@@ -354,6 +364,7 @@ type MyPutRet struct {
 	Name   string
 }
 
+// upload article image
 func (article *ArticleController) UploadImage() {
 	resp := helper.NewResponse()
 
@@ -402,6 +413,7 @@ func (article *ArticleController) UploadImage() {
 	resp.Data = ret.Key
 }
 
+// update article info
 func (article *ArticleController) UpdateArticle() {
 	resp := helper.NewResponse()
 
@@ -481,6 +493,7 @@ func (article *ArticleController) UpdateArticle() {
 	resp.Data = num
 }
 
+// update article relation info
 func (article *ArticleController) UpdateArticleRelation(tagType int, articleId int64, tagsId []string) {
 	if tagType == 2 { // delete and insert
 		article.o.QueryTable(new(models.ArticleRelation)).Filter("article_id", articleId).Delete()

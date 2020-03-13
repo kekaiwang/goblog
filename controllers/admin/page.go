@@ -17,6 +17,7 @@ type PageInfo struct {
 	Total int64
 }
 
+// get client page list info
 func (this *PageController) PageList() {
 	resp := helper.NewResponse()
 	defer resp.WriteJson(this.Ctx.ResponseWriter)
@@ -36,6 +37,7 @@ func (this *PageController) PageList() {
 	resp.Data = info
 }
 
+// create new client page info
 func (page *PageController) CreatePage() {
 	resp := helper.NewResponse()
 
@@ -66,6 +68,7 @@ func (page *PageController) CreatePage() {
 	resp.Data = info
 }
 
+// detail info
 func (page *PageController) Detail() {
 	resp := helper.NewResponse()
 	defer resp.WriteJson(page.Ctx.ResponseWriter)
@@ -77,6 +80,7 @@ func (page *PageController) Detail() {
 	resp.Data = info
 }
 
+// update client page info
 func (page *PageController) UpdatePage() {
 	resp := helper.NewResponse()
 	defer resp.WriteJson(page.Ctx.ResponseWriter)

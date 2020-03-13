@@ -1,0 +1,8 @@
+2020/03/06 09:50:57.869 [I] [asm_amd64.s:1357]  http server Running on http://:8081
+2020/03/06 09:50:57.869 [I] [asm_amd64.s:1357]  Admin server Running on localhost:8085
+2020/03/06 09:50:58.631 [D] [server.go:2802]  |      127.0.0.1|[97;42m 200 [0m|  19.589907ms|   match|[97;44m GET     [0m /     r:/
+2020/03/06 09:50:59.275 [D] [server.go:2802]  |      127.0.0.1|[97;42m 200 [0m|    529.112µs|   match|[97;44m GET     [0m /favicon.ico
+2020/03/13 10:38:26.542 [I] [asm_amd64.s:1357]  http server Running on http://:8081
+2020/03/13 10:38:26.542 [I] [asm_amd64.s:1357]  Admin server Running on localhost:8085
+2020/03/13 10:38:31.208 [D] [server.go:2802]  |      127.0.0.1|[97;42m 200 [0m|  33.166895ms|   match|[97;44m GET     [0m /     r:/
+2020/03/13 10:38:31.274 [D] [server.go:2802]  |      127.0.0.1|[97;42m 200 [0m|    503.962µs|   match|[97;44m GET     [0m /favicon.ico
