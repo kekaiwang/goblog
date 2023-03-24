@@ -52,4 +52,4 @@ httpport = 8888
 >配置好数据库之后是可以直接跑起来的
 
 #### 基本页面 
-可以到我的博客[https://wangkekai.cn](https://wangkekai.cn)查看
+可以到我的博客[https://kekai.wang](https://kekai.wang)查看
